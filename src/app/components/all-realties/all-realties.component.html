@@ -1,0 +1,33 @@
+<div>
+
+  <mat-toolbar>
+      <form (ngSubmit)="goToRealtiesMy()"><button type="submit">My</button></form>
+      <form (ngSubmit)="goToRealtiesEdit()"><button type="submit">Overview</button></form>
+      <form (ngSubmit)="goToRealtiesCreate()"><button type="submit">Create</button></form>
+  </mat-toolbar>
+
+  <form (ngSubmit)="goToRealtiesMy()"><button type="submit">My</button></form>
+  <form (ngSubmit)="goToRealtiesEdit()"><button type="submit">Overview</button></form>
+  <form (ngSubmit)="goToRealtiesCreate()"><button type="submit">Create</button></form>
+
+  <table mat-table [dataSource]="realties">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> Id </th>
+      <td mat-cell *matCellDef="let realty"> {{realty.id}} </td>
+    </ng-container>
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef> Price </th>
+      <td mat-cell *matCellDef="let realty"> {{realty.price}} </td>
+    </ng-container>
+    <ng-container matColumnDef="square">
+      <th mat-header-cell *matHeaderCellDef> Square </th>
+      <td mat-cell *matCellDef="let realty"> {{realty.square}} </td>
+    </ng-container>
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef> Type </th>
+      <td mat-cell *matCellDef="let realty"> {{realty.type}} </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
