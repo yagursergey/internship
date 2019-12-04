@@ -17,7 +17,10 @@ export class RegisterComponent implements OnInit {
   password = '';
   isLoadingResults = false;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthService) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private authService: AuthService) { }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Realty } from 'src/app/model/Realty';
 import { RealtyService } from 'src/app/serivce/realty.service';
+import { MatPaginator } from '@angular/material';
 
 @Component({
   selector: 'app-all-realties',
@@ -11,9 +12,16 @@ import { RealtyService } from 'src/app/serivce/realty.service';
 export class AllRealtiesComponent implements OnInit {
 
   realties: Realty[];
-  displayedColumns: string[] = ['id', 'price', 'square', 'type'];
+  displayedColumns: string[] = ['id', 'price', 'square', 'type', 'overview'];
 
-  constructor(private router: Router, private realtyService: RealtyService) { }
+  // resultLength = 0;
+
+  // @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+
+  constructor(
+    private router: Router,
+    private realtyService: RealtyService
+    ) { }
 
   ngOnInit() {
     this.realtyService.getAllRealties().subscribe( data => {
@@ -22,16 +30,25 @@ export class AllRealtiesComponent implements OnInit {
     console.log(this.realties);
   }
 
+logout() {
+  localStorage.removeItem('token');
+  this.router.navigate(['/login']);
+}
+
 goToRealtiesMy() {
   this.router.navigate(['/realties/my']);
 }
 
 goToRealtiesCreate() {
-  this.router.navigate(['/realties/create']);
+  this.router.navigate(['/realties/new']);
 }
 
-goToRealtiesOverview() {
-  this.router.navigate(['/realty/{id}']);
+goToRealtyOverview(id: string) {
+  this.router.navigate(['/realties/' + id]);
+}
+
+goToUsersAll() {
+  this.router.navigate(['/users/all']);
 }
 
 }

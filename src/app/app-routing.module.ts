@@ -8,6 +8,8 @@ import { AllRealtiesComponent } from './components/all-realties/all-realties.com
 import { MyRealtiesComponent } from './components/my-realties/my-realties.component';
 import { EditRealtiesComponent } from './components/edit-realties/edit-realties.component';
 import { CreateRealtiesComponent } from './components/create-realties/create-realties.component';
+import { UsersAllComponent } from './components/users.all/users.all.component';
+import { UserOverviewComponent } from './components/user.overview/user.overview.component';
 
 
 
@@ -16,6 +18,12 @@ const routes: Routes = [
     path: 'realties/all',
     canActivate: [AuthGuard],
     component: AllRealtiesComponent,
+    data: { title: 'RealEstate' }
+  },
+  {
+    path: 'users/all',
+    canActivate: [AuthGuard],
+    component: UsersAllComponent,
     data: { title: 'RealEstate' }
   },
   {
@@ -31,7 +39,7 @@ const routes: Routes = [
     data: { title: 'RealEstate' }
   },
   {
-    path: 'realties/edit',
+    path: 'realties/edit/:id',
     canActivate: [AuthGuard],
     component: EditRealtiesComponent,
     data: { title: 'RealEstate' }
@@ -40,6 +48,12 @@ const routes: Routes = [
     path: 'realties/:id',
     canActivate: [AuthGuard],
     component: OverviewRealtyComponent,
+    data: { title: 'Overview' }
+  },
+  {
+    path: 'users/:id',
+    canActivate: [AuthGuard],
+    component: UserOverviewComponent,
     data: { title: 'Overview' }
   },
   {

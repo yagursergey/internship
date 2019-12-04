@@ -1,9 +1,9 @@
-<div *ngIf="realty">
+<div *ngIf="user">
 
     <mat-toolbar>
         <div class="halfBlock spaceAround">
             <h1>Overview</h1>
-            <button mat-raised-button (click)="goToRealtyMy()">My Realties</button>
+            <button mat-raised-button (click)="goToUserAll()">All Users</button>
             <button mat-raised-button (click)="goToRealtyAll()">All Realties</button>
         </div>
         <div class="halfBlock rowReverse">
@@ -16,46 +16,42 @@
     <div>
         <mat-card>
             <mat-card-title>
-                <span>Realty# {{realty.id}}</span>
+                <span>User# {{user.id}}</span>
             </mat-card-title>
             <mat-card-content>
 
                 <mat-list>
                     <mat-list-item>
-                        <div class="bigText twoBlocksPosition">Price: </div>
-                        <div class="twoBlocksPosition">{{realty.price}}</div>
+                        <div class="bigText twoBlocksPosition">Id: </div>
+                        <div class="twoBlocksPosition">{{user.id}}</div>
                     </mat-list-item>
                     <mat-divider></mat-divider>
                     <mat-list-item>
-                        <div class="bigText twoBlocksPosition">Square: </div>
-                        <div class="twoBlocksPosition">{{realty.square}}</div>
+                        <div class="bigText twoBlocksPosition">Email: </div>
+                        <div class="twoBlocksPosition">{{user.email}}</div>
                     </mat-list-item>
                     <mat-divider></mat-divider>
                     <mat-list-item>
-                        <div class="bigText twoBlocksPosition">Type: </div>
-                        <div class="twoBlocksPosition">{{realty.type}}</div>
+                        <div class="bigText twoBlocksPosition">First name: </div>
+                        <div class="twoBlocksPosition">{{user.firstName}}</div>
                     </mat-list-item>
                     <mat-divider></mat-divider>
                     <mat-list-item>
                         <div class="bigText twoBlocksPosition">Description: </div>
-                        <div class="twoBlocksPosition">{{realty.description}}</div>
+                        <div class="twoBlocksPosition">{{user.description}}</div>
                     </mat-list-item>
                     <mat-divider></mat-divider>
                     <mat-list-item>
-                        <div class="bigText twoBlocksPosition">Date of creation: </div>
-                        <div class="twoBlocksPosition">{{realty.dateOfCreation}}</div>
+                        <div class="bigText twoBlocksPosition">Second name: </div>
+                        <div class="twoBlocksPosition">{{user.secondName}}</div>
                     </mat-list-item>
                     <mat-divider></mat-divider>
                     <mat-list-item>
-                        <div class="bigText twoBlocksPosition">Full Name: </div>
-                        <div class="twoBlocksPosition">{{realty.ownerFullName}}</div>
+                        <div class="bigText twoBlocksPosition">Role: </div>
+                        <div class="twoBlocksPosition">{{user.role}}</div>
                     </mat-list-item>
                 </mat-list>
             </mat-card-content>
-            <mat-card-actions [style.visibility]="isVisible ? 'visible' : 'hidden'">
-                <button mat-raised-button (click)="goToRealtyEdit()">Edit</button>
-                <button mat-raised-button (click)="delete(realty.id)" class="toRight">Delete</button>
-            </mat-card-actions>
         </mat-card>
     </div>
 </div>

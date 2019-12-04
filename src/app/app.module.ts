@@ -20,12 +20,19 @@ import {
   MatButtonModule,
   MatCardModule,
   MatFormFieldModule,
-  MatTabsModule } from '@angular/material';
+  MatTabsModule,
+  MatToolbarModule,
+  MatDividerModule,
+  MatListModule,
+  MatSelectModule,
+ } from '@angular/material';
 import { MyRealtiesComponent } from './components/my-realties/my-realties.component';
 import { AllRealtiesComponent } from './components/all-realties/all-realties.component';
 import { EditRealtiesComponent } from './components/edit-realties/edit-realties.component';
 import { CreateRealtiesComponent } from './components/create-realties/create-realties.component';
 import { OverviewRealtyComponent } from './components/overview-realty/overview-realty.component';
+import { UsersAllComponent } from './components/users.all/users.all.component';
+import { UserOverviewComponent } from './components/user.overview/user.overview.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +43,9 @@ import { OverviewRealtyComponent } from './components/overview-realty/overview-r
     AllRealtiesComponent,
     EditRealtiesComponent,
     CreateRealtiesComponent,
-    OverviewRealtyComponent
+    OverviewRealtyComponent,
+    UsersAllComponent,
+    UserOverviewComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +67,11 @@ import { OverviewRealtyComponent } from './components/overview-realty/overview-r
     MatButtonModule,
     MatCardModule,
     MatFormFieldModule,
-    MatTabsModule
+    MatTabsModule,
+    MatToolbarModule,
+    MatDividerModule,
+    MatListModule,
+    MatSelectModule,
   ],
   providers: [
     {

@@ -1,1 +1,42 @@
-<p>my-realties works!</p>
+<div>
+
+    <mat-toolbar>
+        <div class="halfBlock spaceAround">
+            <h3>My Realties</h3>
+            <button mat-raised-button (click)="goToRealtiesAll()">All Realties</button>
+            <button mat-raised-button (click)="goToRealtiesCreate()">Create new</button>
+        </div>
+        <div class="halfBlock rowReverse">
+            <button mat-mini-fab (click)="logout()" color="warn">
+                <mat-icon>cancel</mat-icon>
+            </button>
+        </div>
+    </mat-toolbar>
+
+    <table mat-table [dataSource]="realties">
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> Id </th>
+            <td mat-cell *matCellDef="let realty"> {{realty.id}} </td>
+        </ng-container>
+        <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef> Price </th>
+            <td mat-cell *matCellDef="let realty"> {{realty.price}} </td>
+        </ng-container>
+        <ng-container matColumnDef="square">
+            <th mat-header-cell *matHeaderCellDef> Square </th>
+            <td mat-cell *matCellDef="let realty"> {{realty.square}} </td>
+        </ng-container>
+        <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef> Type </th>
+            <td mat-cell *matCellDef="let realty"> {{realty.type}} </td>
+        </ng-container>
+        <ng-container matColumnDef="overview">
+            <th mat-header-cell *matHeaderCellDef> Overview </th>
+            <td mat-cell *matCellDef="let realty">
+                <button mat-raised-button (click)="goToRealtyOverview(realty.id)">Overview</button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>

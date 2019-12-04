@@ -42,4 +42,22 @@ export class RealtyService {
   private log(message: string) {
     console.log(message);
   }
+
+  public save(realty: any): Observable<any> {
+    return this.http.post<Realty>(apiUrl, realty);
+  }
+
+  public edit(realty: any, id: string): Observable<any> {
+    return this.http.patch<Realty>(apiUrl + '/' + id, realty);
+  }
+
+
+  public findById(id: string): Observable<Realty> {
+    return this.http.get<Realty>(apiUrl + '/' + id);
+  }
+
+  public deleteById(id: string): Observable<Realty> {
+    return this.http.delete<Realty>(apiUrl + '/' + id);
+  }
+
 }

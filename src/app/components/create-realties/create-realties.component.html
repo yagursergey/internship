@@ -1,1 +1,56 @@
-<p>create-realties works!</p>
+    <div>
+        <mat-toolbar>
+            <div class="halfBlock spaceAround">
+                <h3>Create new</h3>
+                <button mat-raised-button (click)="goToRealtiesMy()">My Realties</button>
+                <button mat-raised-button (click)="goToRealtiesAll()">All Realties</button>
+            </div>
+            <div class="halfBlock rowReverse">
+                <button mat-mini-fab (click)="logout()" color="warn">
+                    <mat-icon>cancel</mat-icon>
+                </button>
+            </div>
+        </mat-toolbar>
+        <form class="example-container" [formGroup]="registerForm" (ngSubmit)="onFormSubmit(registerForm.value)">
+
+            <mat-form-field class="example-full-width">
+                <input matInput type="price" placeholder="Price" formControlName="price" [errorStateMatcher]="matcher">
+                <mat-error>
+                    <span *ngIf="!registerForm.get('price').valid && registerForm.get('price').touched">Please enter
+                        current price</span>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <input matInput type="square" placeholder="Square" formControlName="square"
+                    [errorStateMatcher]="matcher">
+                <mat-error>
+                    <span *ngIf="!registerForm.get('square').valid && registerForm.get('square').touched">Please enter
+                        current square</span>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-select formControlName="type" placeholder="Select type">
+                    <mat-option value="LAND">Land</mat-option>
+                    <mat-option value="LIVING_ROOM">Living room</mat-option>
+                    <mat-option value="NON_RESIDENTIAL_PREMISES">Non residential premises</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <input matInput type="description" placeholder="Description" formControlName="description"
+                    [errorStateMatcher]="matcher">
+                <mat-error>
+                    <span
+                        *ngIf="!registerForm.get('description').valid && registerForm.get('description').touched">Please
+                        enter
+                        current description</span>
+                </mat-error>
+            </mat-form-field>
+
+            <div class="button-row">
+                <button type="submit" mat-raised-button>Create</button>
+            </div>
+        </form>
+    </div>
