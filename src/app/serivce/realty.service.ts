@@ -51,6 +51,9 @@ export class RealtyService {
     return this.http.patch<Realty>(apiUrl + '/' + id, realty);
   }
 
+  public findAllDeleted(): Observable<Realty[]> {
+    return this.http.get<Realty[]>(apiUrl + '/deleted');
+  }
 
   public findById(id: string): Observable<Realty> {
     return this.http.get<Realty>(apiUrl + '/' + id);
@@ -58,6 +61,11 @@ export class RealtyService {
 
   public deleteById(id: string): Observable<Realty> {
     return this.http.delete<Realty>(apiUrl + '/' + id);
+  }
+
+  undelete(id: string): Observable<any> {
+    console.log(apiUrl + '/deleted/' + id)
+    return this.http.patch<any>(apiUrl + '/deleted/' + id, '');
   }
 
 }

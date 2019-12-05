@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AllRealtiesComponent } from './all-realties.component';
+import { AllRealtiesComponent } from './realties.all.list.component';
 
 describe('AllRealtiesComponent', () => {
   let component: AllRealtiesComponent;

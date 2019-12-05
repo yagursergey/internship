@@ -36,10 +36,6 @@ export class LoginComponent implements OnInit {
             localStorage.setItem('token', res.token);
             localStorage.setItem('role', res.role);
             localStorage.setItem('userFullname', res.userFullname);
-
-            // sessionStorage.setItem('token', res.token);
-            // sessionStorage.setItem('role', res.role);
-            // sessionStorage.setItem('userFullname', res.userFullname);
             this.router.navigate(['realties/all']);
           }
         }, (err) => {

@@ -4,11 +4,11 @@ import { Router } from '@angular/router';
 import { RealtyService } from 'src/app/serivce/realty.service';
 
 @Component({
-  selector: 'app-my-realties',
-  templateUrl: './my-realties.component.html',
-  styleUrls: ['./my-realties.component.css']
+  selector: 'app-realties-my-list',
+  templateUrl: './realties.my.list.component.html',
+  styleUrls: ['./realties.my.list.component.css']
 })
-export class MyRealtiesComponent implements OnInit {
+export class RealtiesMyListComponent implements OnInit {
 
   realties: Realty[];
   displayedColumns: string[] = ['id', 'price', 'square', 'type', 'overview'];
@@ -36,6 +36,7 @@ goToRealtiesCreate() {
 }
 
 goToRealtyOverview(id: string) {
+  localStorage.setItem('isOwner', 'true');
   this.router.navigate(['/realties/' + id]);
 }
 }

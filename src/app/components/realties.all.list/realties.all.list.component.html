@@ -1,22 +1,17 @@
-<!-- <div class="example-container mat-elevation-z8"> -->
-<!-- <div class="example-table-container"> -->
-
 <div>
   <mat-toolbar>
     <div class="halfBlock spaceAround">
       <h3>All Realties</h3>
-      <button mat-raised-button (click)="goToRealtiesMy()">My Realties</button>
-      <!-- FIX -->
-      <button mat-raised-button (click)="goToUsersAll()">All Users</button>
-      <!-- FIX -->
-      <button mat-raised-button (click)="goToRealtiesCreate()">Create new</button>
+      <button [style.display]="isVisibleForAdmin ? 'none' : 'block'" mat-raised-button (click)="goToRealtiesMy()">My Realties</button>
+      <button [style.display]="isVisibleForUser ? 'none' : 'block'" mat-raised-button (click)="goToUsersAll()">All Users</button>
+      <button [style.display]="isVisibleForAdmin ? 'none' : 'block'" mat-raised-button (click)="goToRealtiesCreate()">Create new</button>
+      <button [style.display]="isVisibleForUser ? 'none' : 'block'" mat-raised-button (click)="goToRealtiesDeletedList()">Deleted Realties</button>
     </div>
     <div class="halfBlock rowReverse">
       <button mat-mini-fab (click)="logout()" color="warn">
         <mat-icon>cancel</mat-icon>
       </button>
     </div>
-    <!-- <button mat-raised-button (click)="logout()">logout</button> -->
   </mat-toolbar>
 
   <table mat-table [dataSource]="realties">
@@ -45,6 +40,4 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-  <!-- </div> -->
-  <!-- <mat-paginator [length]="resultsLength" [pageSize]="10"></mat-paginator> -->
 </div>

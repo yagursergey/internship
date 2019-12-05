@@ -12,7 +12,8 @@ import { ErrorStateMatcher } from '@angular/material/core';
 export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
-  fullName = '';
+  firstName = '';
+  secondName = '';
   email = '';
   password = '';
   isLoadingResults = false;
@@ -24,7 +25,8 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
-      'fullName' : [null, Validators.required],
+      'firstName' : [null, Validators.required],
+      'secondName' : [null, Validators.required],
       'email' : [null, Validators.required],
       'password' : [null, Validators.required]
     });

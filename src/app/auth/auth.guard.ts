@@ -7,6 +7,7 @@ import { AuthService } from '../serivce/auth.service';
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
+  
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {

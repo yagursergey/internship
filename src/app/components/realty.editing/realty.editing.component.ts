@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { Realty } from 'src/app/model/Realty';
-import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, NgForm, Validators } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
 import { RealtyService } from 'src/app/serivce/realty.service';
-import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-create-realties',
-  templateUrl: './create-realties.component.html',
-  styleUrls: ['./create-realties.component.css']
+  selector: 'app-realty-editing',
+  templateUrl: './realty.editing.component.html',
+  styleUrls: ['./realty.editing.component.css']
 })
-export class CreateRealtiesComponent implements OnInit {
+export class RealtyEditingComponent implements OnInit {
 
+ 
   realty: Realty;
-
+  id: string;
   registerForm: FormGroup;
 
   price: string;
@@ -23,13 +24,15 @@ export class CreateRealtiesComponent implements OnInit {
   constructor(
     private router: Router,
     private realtyService: RealtyService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute
     ) {
-    // this.realty = new Realty();
+    this.route.paramMap.subscribe( params => this.id = params.get('id'));
    }
 
    onFormSubmit(form: NgForm) {
-     this.realtyService.save(form).subscribe( res => {
+     console.log(form);
+     this.realtyService.edit(form, this.id).subscribe( res => {
       this.goToRealtiesMy();
      });
    }
@@ -40,6 +43,11 @@ export class CreateRealtiesComponent implements OnInit {
       'square': [null, Validators.required],
       'type': [null, Validators.required],
       'description': [null, Validators.required]
+    });
+
+    this.realtyService.findById(this.id).subscribe( data => {
+      this.realty = data;
+      console.log(this.realty)
     })
   }
 
@@ -55,4 +63,5 @@ export class CreateRealtiesComponent implements OnInit {
     localStorage.removeItem('token');
     this.router.navigate(['/login'])
   }
+  
 }

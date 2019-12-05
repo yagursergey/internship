@@ -37,4 +37,8 @@ export class UsersAllComponent implements OnInit {
     this.router.navigate(['/users/' + id]);
   }
 
+  goToRealtiesDeletedList() {
+    this.router.navigate(['/deleted']);
+  }
+
 }

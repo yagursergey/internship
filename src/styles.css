@@ -33,6 +33,15 @@ body {
     flex-direction: row-reverse;
 }
 
+.doFlex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .spaceAround {
     justify-content: space-around;
+}
+
+.spaceBetween {
+    justify-content: space-between;
 }

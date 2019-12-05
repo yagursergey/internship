@@ -3,21 +3,28 @@ import { Routes, RouterModule } from '@angular/router';
 import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
 import { AuthGuard } from './auth/auth.guard';
-import { OverviewRealtyComponent} from './components/overview-realty/overview-realty.component';
-import { AllRealtiesComponent } from './components/all-realties/all-realties.component';
-import { MyRealtiesComponent } from './components/my-realties/my-realties.component';
-import { EditRealtiesComponent } from './components/edit-realties/edit-realties.component';
-import { CreateRealtiesComponent } from './components/create-realties/create-realties.component';
+import { RealtyOverviewComponent} from './components/realty.overview/realty.overview.component';
+import { RealtiesAllListComponent } from './components/realties.all.list/realties.all.list.component';
+import { RealtiesMyListComponent } from './components/realties.my.list/realties.my.list.component';
+import { RealtyEditingComponent } from './components/realty.editing/realty.editing.component';
+import { RealtyCreatingComponent } from './components/realty.creating/realty.creating.component';
 import { UsersAllComponent } from './components/users.all/users.all.component';
 import { UserOverviewComponent } from './components/user.overview/user.overview.component';
+import { RealtiesDeletedListComponent } from './components/realties.deleted.list/realties.deleted.list.component';
 
 
 
 const routes: Routes = [
   {
+    path: 'deleted',
+    canActivate: [AuthGuard],
+    component: RealtiesDeletedListComponent,
+    data: { title: 'RealEstate' }
+  },
+  {
     path: 'realties/all',
     canActivate: [AuthGuard],
-    component: AllRealtiesComponent,
+    component: RealtiesAllListComponent,
     data: { title: 'RealEstate' }
   },
   {
@@ -29,25 +36,25 @@ const routes: Routes = [
   {
     path: 'realties/my',
     canActivate: [AuthGuard],
-    component: MyRealtiesComponent,
+    component: RealtiesMyListComponent,
     data: { title: 'RealEstate' }
   },
   {
     path: 'realties/new',
     canActivate: [AuthGuard],
-    component: CreateRealtiesComponent,
+    component: RealtyCreatingComponent,
     data: { title: 'RealEstate' }
   },
   {
-    path: 'realties/edit/:id',
+    path: 'realties/editing/:id',
     canActivate: [AuthGuard],
-    component: EditRealtiesComponent,
+    component: RealtyEditingComponent,
     data: { title: 'RealEstate' }
   },
   {
     path: 'realties/:id',
     canActivate: [AuthGuard],
-    component: OverviewRealtyComponent,
+    component: RealtyOverviewComponent,
     data: { title: 'Overview' }
   },
   {

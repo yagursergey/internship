@@ -37,4 +37,9 @@ export class UserOverviewComponent implements OnInit {
     this.router.navigate(['/users/all']);
   }
 
+  logout() {
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
+  }
+
 }

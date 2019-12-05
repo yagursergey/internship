@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
-import { Routes } from '@angular/router';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -26,26 +25,28 @@ import {
   MatListModule,
   MatSelectModule,
  } from '@angular/material';
-import { MyRealtiesComponent } from './components/my-realties/my-realties.component';
-import { AllRealtiesComponent } from './components/all-realties/all-realties.component';
-import { EditRealtiesComponent } from './components/edit-realties/edit-realties.component';
-import { CreateRealtiesComponent } from './components/create-realties/create-realties.component';
-import { OverviewRealtyComponent } from './components/overview-realty/overview-realty.component';
+import { RealtiesAllListComponent } from './components/realties.all.list/realties.all.list.component';
+import { RealtiesMyListComponent } from './components/realties.my.list/realties.my.list.component';
+import { RealtyCreatingComponent } from './components/realty.creating/realty.creating.component';
+import { RealtyEditingComponent } from './components/realty.editing/realty.editing.component';
+import { RealtyOverviewComponent } from './components/realty.overview/realty.overview.component';
 import { UsersAllComponent } from './components/users.all/users.all.component';
 import { UserOverviewComponent } from './components/user.overview/user.overview.component';
+import { RealtiesDeletedListComponent } from './components/realties.deleted.list/realties.deleted.list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    MyRealtiesComponent,
-    AllRealtiesComponent,
-    EditRealtiesComponent,
-    CreateRealtiesComponent,
-    OverviewRealtyComponent,
     UsersAllComponent,
-    UserOverviewComponent
+    UserOverviewComponent,
+    RealtiesAllListComponent,
+    RealtiesMyListComponent,
+    RealtyCreatingComponent,
+    RealtyEditingComponent,
+    RealtyOverviewComponent,
+    RealtiesDeletedListComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,19 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Realty } from 'src/app/model/Realty';
-import { FormGroup, FormBuilder, NgForm, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { RealtyService } from 'src/app/serivce/realty.service';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-edit-realties',
-  templateUrl: './edit-realties.component.html',
-  styleUrls: ['./edit-realties.component.css']
+  selector: 'app-realty-creating',
+  templateUrl: './realty.creating.component.html',
+  styleUrls: ['./realty.creating.component.css']
 })
-export class EditRealtiesComponent implements OnInit {
+export class RealtyCreatingComponent implements OnInit {
 
- 
   realty: Realty;
-  id: string;
+
   registerForm: FormGroup;
 
   price: string;
@@ -24,16 +23,11 @@ export class EditRealtiesComponent implements OnInit {
   constructor(
     private router: Router,
     private realtyService: RealtyService,
-    private formBuilder: FormBuilder,
-    private route: ActivatedRoute
-    ) {
-    // this.realty = new Realty();
-    this.route.paramMap.subscribe( params => this.id = params.get('id'));
-   }
+    private formBuilder: FormBuilder
+    ) { }
 
    onFormSubmit(form: NgForm) {
-     console.log(form);
-     this.realtyService.edit(form, this.id).subscribe( res => {
+     this.realtyService.save(form).subscribe( res => {
       this.goToRealtiesMy();
      });
    }
@@ -44,11 +38,6 @@ export class EditRealtiesComponent implements OnInit {
       'square': [null, Validators.required],
       'type': [null, Validators.required],
       'description': [null, Validators.required]
-    });
-
-    this.realtyService.findById(this.id).subscribe( data => {
-      this.realty = data;
-      console.log(this.realty)
     })
   }
 
@@ -64,5 +53,4 @@ export class EditRealtiesComponent implements OnInit {
     localStorage.removeItem('token');
     this.router.navigate(['/login'])
   }
-  
 }
