@@ -11,7 +11,7 @@
             </button>
         </div>
     </mat-toolbar>
-    <form class="example-container" [formGroup]="registerForm" (ngSubmit)="onFormSubmit(registerForm.value)">
+    <form class="example-container" [formGroup]="realtyForm" (ngSubmit)="onFormSubmit(realtyForm.value)">
 
         <mat-form-field class="example-full-width">
             <input matInput type="price" placeholder="Price" formControlName="price" [errorStateMatcher]="matcher" value="{{realty.price}}">

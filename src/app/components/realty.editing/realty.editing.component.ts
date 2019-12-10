@@ -14,7 +14,7 @@ export class RealtyEditingComponent implements OnInit {
  
   realty: Realty;
   id: string;
-  registerForm: FormGroup;
+  realtyForm: FormGroup;
 
   price: string;
   square: string;
@@ -38,18 +38,30 @@ export class RealtyEditingComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.registerForm = this.formBuilder.group({
+
+    this.realtyService.findById(this.id).subscribe( data => {
+      this.realty = data;
+      console.log(this.realty)
+    })
+
+    this.realtyForm = this.formBuilder.group({
       'price': [null, Validators.required],
       'square': [null, Validators.required],
       'type': [null, Validators.required],
       'description': [null, Validators.required]
     });
 
-    this.realtyService.findById(this.id).subscribe( data => {
-      this.realty = data;
-      console.log(this.realty)
-    })
+    // this.fillRealtyForm();
   }
+
+  // fillRealtyForm() {
+  //   this.realtyForm.setValue({
+  //     price: this.realty.price,
+  //     square: this.realty.square,
+  //     type: this.realty.type,
+  //     description: this.realty.description
+  //   })
+  // }
 
   goToRealtiesMy() {
     this.router.navigate(['/realties/my']);

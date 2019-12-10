@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Realty } from 'src/app/model/Realty';
 import { RealtyService } from 'src/app/serivce/realty.service';
+import { MatPaginator, MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-realties-all-list',
@@ -10,12 +11,15 @@ import { RealtyService } from 'src/app/serivce/realty.service';
 })
 export class RealtiesAllListComponent implements OnInit {
 
+  dataSource: MatTableDataSource<Realty>;
   realties: Realty[];
   displayedColumns: string[] = ['id', 'price', 'square', 'type', 'overview'];
   isVisibleForUser: boolean;
   isVisibleForAdmin: boolean;
+  isASC: boolean;
   role: string;
 
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(
     private router: Router,
@@ -23,14 +27,15 @@ export class RealtiesAllListComponent implements OnInit {
     ) {
       this.isVisibleForUser = false;
       this.isVisibleForAdmin = false;
+      this.isASC = false;
       this.role = localStorage.getItem('role');
   }
 
   ngOnInit() {
     this.realtyService.getAllRealties().subscribe( data => {
       this.realties = data;
+      this.updateTable();
     });
-    console.log(this.realties);
     this.checkRoleAndRenderElements();
   }
 
@@ -41,6 +46,21 @@ export class RealtiesAllListComponent implements OnInit {
       this.isVisibleForAdmin = true;
     }
     console.log(this.isVisibleForAdmin + ' \\\ ' + this.isVisibleForUser);
+  }
+
+  sort(value: string) {
+    console.log(value);
+    if (this.isASC) {
+      this.realtyService.sortByValue(value, 'ASC').subscribe( data => {
+        this.realties = data;
+      })
+    } else {
+      this.realtyService.sortByValue(value, 'DESC').subscribe( data => {
+        this.realties = data;
+      })
+    }
+    this.updateTable();
+    this.isASC = !this.isASC;
   }
 
   logout() {
@@ -66,5 +86,14 @@ export class RealtiesAllListComponent implements OnInit {
 
   goToRealtiesDeletedList() {
     this.router.navigate(['/deleted']);
+  }
+
+  updateTable() {
+    this.dataSource = new MatTableDataSource(this.realties);
+    this.dataSource.paginator = this.paginator;
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }

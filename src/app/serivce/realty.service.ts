@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Realty } from '../model/Realty';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
-const apiUrl = 'http://localhost:8080/realties';
+const apiUrl = 'http://localhost:8080/api/v1/realties';
 
 @Injectable({
   providedIn: 'root'
@@ -57,6 +57,21 @@ export class RealtyService {
 
   public findById(id: string): Observable<Realty> {
     return this.http.get<Realty>(apiUrl + '/' + id);
+  }
+
+  sortByValue(value: string, by: string): Observable<Realty[]> {
+    let params = new HttpParams().set("orderValue",value).set("orderBy", by);
+    return this.http.get<Realty[]>(apiUrl, {params: params});
+  }
+
+  sortByValueMy(value: string, by: string): Observable<Realty[]> {
+    let params = new HttpParams().set("orderValue",value).set("orderBy", by);
+    return this.http.get<Realty[]>(apiUrl + '/my', {params: params});
+  }
+
+  sortByValueDel(value: string, by: string): Observable<Realty[]> {
+    let params = new HttpParams().set("orderValue",value).set("orderBy", by);
+    return this.http.get<Realty[]>(apiUrl + '/deleted', {params: params});
   }
 
   public deleteById(id: string): Observable<Realty> {

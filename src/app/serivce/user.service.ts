@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { User } from '../model/User';
 import { catchError, tap } from 'rxjs/operators';
 
-const apiUrl = 'http://localhost:8080/users';
+const apiUrl = 'http://localhost:8080/api/v1/users';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +29,11 @@ export class UserService {
 
       return of(result as T);
     };
+  }
+
+  sortByValue(value: string, by: string): Observable<User[]> {
+    let params = new HttpParams().set("orderValue",value).set("orderBy", by);
+    return this.http.get<User[]>(apiUrl, {params: params});
   }
 
   private log(message: string) {
