@@ -11,12 +11,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -29,69 +27,35 @@ public class RealtyRepositoryIntegrationTest {
     @Autowired
     private RealtyRepository realtyRepository;
 
-    private User owner;
-    private Realty realty;
-    private Sort sort;
+    private static final Long USER_ID = 2L;
 
-    public void beforeTest() {
-        realty = new Realty();
-        realty.setId(1L);
-
-        owner = new User();
-        owner.setId(2L);
-        owner.setEmail("user#TEST@mail.com");
-
-        realty.setOwner(owner);
-
-    }
+    private Sort sort = Sort.by(Sort.Direction.ASC, "id");
 
     @Test
     public void whenFindByOwnerAndSort_thenReturnListOfRealties() {
-
-        beforeTest();
-
-        sort = Sort.by("price");
+        User owner = new User();
+        owner.setId(USER_ID);
 
         Optional<List<Realty>> foundRealties = realtyRepository.findByOwnerAndIsDeletedFalse(owner, sort);
-        Long idOfFoundRealty = foundRealties.get().get(0).getId();
-        assertThat(idOfFoundRealty)
-                .isEqualTo(this.realty.getId());
+        assertNotNull(foundRealties);
+
     }
 
     @Test
     public void whenFindByIsDeletedFalse_thenReturnListOfRealties() {
 
-        beforeTest();
-
-        sort = Sort.by(Sort.Direction.ASC, "id");
-
-        List<Realty> realties = new ArrayList<>();
-        realties.add(realty);
-
         List<Realty> foundRealties = realtyRepository.findByIsDeletedFalse(sort);
 
-        assertThat(getOneAndReturnIsDeleted(foundRealties))
-                .isEqualTo(getOneAndReturnIsDeleted(realties));
+        assertFalse(foundRealties.get(0).isDeleted());
+
     }
 
     @Test
     public void whenFindByIsDeletedTrue_thenReturnListOfRealties() {
 
-        beforeTest();
-
-        sort = Sort.by(Sort.Direction.ASC, "id");
-
-        List<Realty> realties = new ArrayList<>();
-        this.realty.setDeleted(true);
-        realties.add(realty);
-
         List<Realty> foundRealties = realtyRepository.findByIsDeletedTrue(sort);
 
-        assertThat(getOneAndReturnIsDeleted(foundRealties))
-                .isEqualTo(getOneAndReturnIsDeleted(realties));
+        assertTrue(foundRealties.get(0).isDeleted());
     }
 
-    private boolean getOneAndReturnIsDeleted(List<Realty> realtyList) {
-        return realtyList.stream().map(Realty::isDeleted).collect(Collectors.toList()).get(0);
-    }
 }

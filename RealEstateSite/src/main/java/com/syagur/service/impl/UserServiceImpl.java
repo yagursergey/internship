@@ -4,6 +4,7 @@ import com.syagur.entity.User;
 import com.syagur.exception.UserNotFoundException;
 import com.syagur.repository.UserRepository;
 import com.syagur.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -13,11 +14,8 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private final UserRepository userRepository;
-
-    public UserServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public List<User> findAll(Sort sort) {

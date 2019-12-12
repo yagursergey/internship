@@ -39,10 +39,10 @@ public class RealtyController {
             @RequestParam(value = "orderValue", defaultValue = "id") String orderValue,
             @RequestParam(value = "orderBy", defaultValue = "ASC") String sortWith) {
 
-        List<RealtyDto> realtyDtos = realtyService.findAllNotDeletedAndSort(orderValue, sortWith)
-                .stream()
-                .map(converter::toRealtyDto)
-                .collect(Collectors.toList());
+        Sort sort = Sort.by(Sort.Direction.valueOf(sortWith), orderValue);
+
+        List<Realty> realty = realtyService.findAllNotDeletedAndSort(sort);
+        List<RealtyDto> realtyDtos = toRealtyDtosList(realty);
 
         return ResponseEntity.ok(realtyDtos);
     }
@@ -55,10 +55,8 @@ public class RealtyController {
         User owner = userDetailsService.getAuthenticatedUser();
         Sort sort = Sort.by(Sort.Direction.valueOf(orderBy), orderValue);
 
-        List<RealtyDto> realtyDtos = realtyService.findByOwnerAndSort(owner, sort)
-                .stream()
-                .map(converter::toRealtyDto)
-                .collect(Collectors.toList());
+        List<Realty> realty = realtyService.findByOwnerAndSort(owner, sort);
+        List<RealtyDto> realtyDtos = toRealtyDtosList(realty);
 
         return ResponseEntity.ok(realtyDtos);
     }
@@ -70,10 +68,8 @@ public class RealtyController {
 
         Sort sort = Sort.by(Sort.Direction.valueOf(orderBy), orderValue);
 
-        List<RealtyDto> realtyDtos = realtyService.getAllDeleted(sort)
-                .stream()
-                .map(converter::toRealtyDto)
-                .collect(Collectors.toList());
+        List<Realty> realty = realtyService.getAllDeleted(sort);
+        List<RealtyDto> realtyDtos = toRealtyDtosList(realty);
 
         return ResponseEntity.ok(realtyDtos);
     }
@@ -111,5 +107,12 @@ public class RealtyController {
     ResponseEntity<Void> deleteRealty(@PathVariable("id") Long id) {
         realtyService.deleteById(id);
         return ResponseEntity.ok().build();
+    }
+
+    private List<RealtyDto> toRealtyDtosList(List<Realty> realties) {
+        return realties
+                .stream()
+                .map(converter::toRealtyDto)
+                .collect(Collectors.toList());
     }
 }

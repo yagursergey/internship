@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface RealtyService {
 
-    List<Realty> findAllNotDeletedAndSort(String value, String sortWith);
+    List<Realty> findAllNotDeletedAndSort(Sort sort);
 
     List<Realty> findByOwnerAndSort(User owner, Sort sort);
 

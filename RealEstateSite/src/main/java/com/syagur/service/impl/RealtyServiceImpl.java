@@ -44,11 +44,8 @@ class RealtyServiceImpl implements RealtyService {
     }
 
     @Override
-    public List<Realty> findAllNotDeletedAndSort(String value, String sortWith) {
-
-        Sort.Direction sortWithASCOrDESC = Sort.Direction.valueOf(sortWith);
-
-        return realtyRepository.findByIsDeletedFalse(Sort.by(sortWithASCOrDESC, value));
+    public List<Realty> findAllNotDeletedAndSort(Sort sort) {
+        return realtyRepository.findByIsDeletedFalse(sort);
     }
 
     public void saveNewRealty(Realty realty) {

@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DataJpaTest
 @RunWith(SpringRunner.class)
@@ -24,20 +25,16 @@ public class UserRepositoryIntegrationTest {
     @Autowired
     UserRepository userRepository;
 
-    private User user;
+    private static final String USER_EMAIL = "user#TEST@mail.com";
+
 
     @Test
     public void whenFindUserByEmail_thenReturnUser() {
-        user = new User();
-        user.setEmail("user#TEST@mail.com");
 
-        Optional<User> optionalUser = Optional.of(user);
+        Optional<User> foundUser = userRepository.findByEmail(USER_EMAIL);
 
-        Optional<User> foundUser = userRepository.findByEmail("user#TEST@mail.com");
-
-        String emailOfFoundUser = foundUser.get().getEmail();
-
-        assertThat(emailOfFoundUser)
-                .isEqualTo(this.user.getEmail());
+        assertTrue(foundUser.isPresent());
+        assertThat(USER_EMAIL)
+                .isEqualTo(foundUser.get().getEmail());
     }
 }
