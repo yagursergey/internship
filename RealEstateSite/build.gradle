@@ -1,0 +1,46 @@
+plugins {
+	id 'org.springframework.boot' version '2.2.1.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+	id 'java'
+	id 'war'
+}
+
+group = 'com.syagur'
+version = '0.0.1-SNAPSHOT'
+//sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+}
+
+def swaggerVersion = '2.9.2'
+def jjwtVersion = '0.9.1'
+def mapStructVersion = '1.3.1.Final'
+
+
+
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.flywaydb:flyway-core'
+	runtimeOnly 'com.h2database:h2'
+	compile "io.springfox:springfox-swagger2:${swaggerVersion}"
+	compile "io.springfox:springfox-swagger-ui:${swaggerVersion}"
+//	compile('javax.xml.bind:jaxb-api:2.3.0')
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+	testImplementation 'org.springframework.security:spring-security-test'
+	implementation "io.jsonwebtoken:jjwt:${jjwtVersion}"
+	compile "org.mapstruct:mapstruct:${mapStructVersion}"
+	annotationProcessor "org.mapstruct:mapstruct-processor:${mapStructVersion}"
+	implementation 'junit:junit:4.12'
+//	implementation 'junit:junit:4.12'
+}
+
+test {
+	useJUnitPlatform()
+}
