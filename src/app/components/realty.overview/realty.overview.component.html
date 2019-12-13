@@ -1,17 +1,23 @@
 <div *ngIf="realty">
 
-    <mat-toolbar>
-        <div class="halfBlock spaceAround">
-            <h1>Overview</h1>
-            <button [style.display]="isVisibleForAdmin ? 'none' : 'block'" mat-raised-button (click)="goToRealtyMy()">My Realties</button>
-            <button mat-raised-button (click)="goToRealtyAll()">All Realties</button>
-        </div>
-        <div class="halfBlock rowReverse">
-            <button mat-mini-fab (click)="logout()" color="warn">
-                <mat-icon>cancel</mat-icon>
-            </button>
-        </div>
-    </mat-toolbar>
+    <div>
+        <app-lights></app-lights>
+
+        <mat-toolbar>
+            <div class="halfBlock spaceAround">
+                <h1>Overview</h1>
+                <button [style.display]="isVisibleForAdmin ? 'none' : 'block'" mat-raised-button
+                    (click)="goToRealtyMy()">My Realties</button>
+                <button mat-raised-button (click)="goToRealtyAll()">All Realties</button>
+            </div>
+            <div class="halfBlock rowReverse">
+                <button mat-mini-fab (click)="logout()" color="warn">
+                    <mat-icon>cancel</mat-icon>
+                </button>
+            </div>
+        </mat-toolbar>
+
+    </div>
 
     <div>
         <mat-card>
@@ -48,11 +54,12 @@
                     <mat-divider></mat-divider>
                     <mat-list-item>
                         <div class="bigText twoBlocksPosition">Full Name: </div>
-                        <div class="twoBlocksPosition">{{realty.ownerFullName}}</div>
+                        <div class="twoBlocksPosition">{{ownerName}}</div>
                     </mat-list-item>
                 </mat-list>
             </mat-card-content>
-            <mat-card-actions [style.display]="isVisibleForAdmin ? 'none' : 'block'" [style.display]="isOwner ? 'block' : 'none'">
+            <mat-card-actions [style.display]="isVisibleForAdmin ? 'none' : 'block'"
+                [style.display]="isOwner ? 'block' : 'none'">
                 <button mat-raised-button (click)="goToRealtyEdit()">Edit</button>
                 <button mat-raised-button (click)="delete(realty.id)" class="toRight">Delete</button>
             </mat-card-actions>

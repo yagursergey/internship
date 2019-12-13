@@ -70,7 +70,7 @@ export class RealtiesDeletedListComponent implements OnInit {
 
   undelete(id: string) {
       this.realtyService.undelete(id).subscribe( res => console.log(res));
-      this.router.navigate(['/realties/all']);
+      window.location.reload();
   }
 
   updateTable() {

@@ -13,7 +13,11 @@ export class AuthService {
   isLoggedIn = false;
   redirectUrl: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    if(localStorage.getItem('token')) {
+      this.isLoggedIn = true;
+    }
+   }
 
   login(data: any): Observable<any> {
     return this.http.post<any>(apiUrl + 'login', data)

@@ -1,17 +1,23 @@
 <div *ngIf="user">
 
-    <mat-toolbar>
-        <div class="halfBlock spaceAround">
-            <h1>Overview</h1>
-            <button mat-raised-button (click)="goToUserAll()">All Users</button>
-            <button mat-raised-button (click)="goToRealtyAll()">All Realties</button>
-        </div>
-        <div class="halfBlock rowReverse">
-            <button mat-mini-fab (click)="logout()" color="warn">
-                <mat-icon>cancel</mat-icon>
-            </button>
-        </div>
-    </mat-toolbar>
+    <div>
+        
+        <app-lights></app-lights>
+
+        <mat-toolbar>
+            <div class="halfBlock spaceAround">
+                <h1>Overview</h1>
+                <button mat-raised-button (click)="goToUserAll()">All Users</button>
+                <button mat-raised-button (click)="goToRealtyAll()">All Realties</button>
+            </div>
+            <div class="halfBlock rowReverse">
+                <button mat-mini-fab (click)="logout()" color="warn">
+                    <mat-icon>cancel</mat-icon>
+                </button>
+            </div>
+        </mat-toolbar>
+
+    </div>
 
     <div>
         <mat-card>

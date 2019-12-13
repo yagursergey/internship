@@ -16,6 +16,7 @@ export class RealtyOverviewComponent implements OnInit {
   isVisibleForAdmin: boolean;
   role: string;
   isOwner: boolean = false;
+  ownerName = localStorage.getItem('userFullname');
 
   constructor(
     private realtyService: RealtyService,
@@ -59,7 +60,7 @@ export class RealtyOverviewComponent implements OnInit {
       console.log('success');
     });
     localStorage.removeItem('isOwner');
-    this.goToRealtyAll();
+    this.goToRealtyMy();
   }
 
   goToRealtyMy() {

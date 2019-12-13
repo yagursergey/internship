@@ -23,6 +23,7 @@ export class RealtiesMyListComponent implements OnInit {
   }
 
   ngOnInit() {
+ 
     this.realtyService.getMyRealties().subscribe( data => {
       this.realties = data;
       this.updateTable();

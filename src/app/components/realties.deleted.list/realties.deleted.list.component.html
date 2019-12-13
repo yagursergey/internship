@@ -1,16 +1,23 @@
 <div>
-  <mat-toolbar>
-    <div class="halfBlock spaceAround">
-      <h3>Deleted Realties</h3>
-      <button mat-raised-button (click)="goToRealtiesAll()">All Realties</button>
-      <button mat-raised-button (click)="goToUsersAll()">All Users</button>
-    </div>
-    <div class="halfBlock rowReverse">
-      <button mat-mini-fab (click)="logout()" color="warn">
-        <mat-icon>cancel</mat-icon>
-      </button>
-    </div>
-  </mat-toolbar>
+
+  <div>
+
+    <app-lights></app-lights>
+
+    <mat-toolbar>
+      <div class="halfBlock spaceAround">
+        <h3>Deleted Realties</h3>
+        <button mat-raised-button (click)="goToRealtiesAll()">All Realties</button>
+        <button mat-raised-button (click)="goToUsersAll()">All Users</button>
+      </div>
+      <div class="halfBlock rowReverse">
+        <button mat-mini-fab (click)="logout()" color="warn">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </div>
+    </mat-toolbar>
+
+  </div>
 
   <div>
 

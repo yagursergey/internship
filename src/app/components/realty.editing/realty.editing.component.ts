@@ -27,7 +27,7 @@ export class RealtyEditingComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute
     ) {
-    this.route.paramMap.subscribe( params => this.id = params.get('id'));
+      this.route.paramMap.subscribe( params => this.id = params.get('id'));
    }
 
    onFormSubmit(form: NgForm) {
@@ -38,6 +38,7 @@ export class RealtyEditingComponent implements OnInit {
    }
 
   ngOnInit() {
+    console.log(this.id);
 
     this.realtyService.findById(this.id).subscribe( data => {
       this.realty = data;
@@ -50,18 +51,7 @@ export class RealtyEditingComponent implements OnInit {
       'type': [null, Validators.required],
       'description': [null, Validators.required]
     });
-
-    // this.fillRealtyForm();
   }
-
-  // fillRealtyForm() {
-  //   this.realtyForm.setValue({
-  //     price: this.realty.price,
-  //     square: this.realty.square,
-  //     type: this.realty.type,
-  //     description: this.realty.description
-  //   })
-  // }
 
   goToRealtiesMy() {
     this.router.navigate(['/realties/my']);

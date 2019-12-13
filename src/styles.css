@@ -45,3 +45,9 @@ body {
 .spaceBetween {
     justify-content: space-between;
 }
+
+.boxForLights {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 7%;
+}
