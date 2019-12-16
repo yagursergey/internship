@@ -94,19 +94,19 @@ public class RealtyController {
     @PatchMapping("/deleted/{id}")
     ResponseEntity<Void> undeleteCurrentRealty(@PathVariable("id") Long id) {
         realtyService.undeleteById(id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.status(204).build();
     }
 
     @PatchMapping("/{id}")
     ResponseEntity<Void> patchReality(@PathVariable("id") Long id, @RequestBody RealtyDto realtyDto) {
         realtyService.edit(realtyDto, id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.status(204).build();
     }
 
     @DeleteMapping("/{id}")
     ResponseEntity<Void> deleteRealty(@PathVariable("id") Long id) {
         realtyService.deleteById(id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.status(204).build();
     }
 
     private List<RealtyDto> toRealtyDtosList(List<Realty> realties) {
