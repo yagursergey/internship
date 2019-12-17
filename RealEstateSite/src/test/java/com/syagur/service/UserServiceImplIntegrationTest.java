@@ -1,8 +1,9 @@
 package com.syagur.service;
 
-import com.syagur.entity.User;
-import com.syagur.repository.UserRepository;
-import com.syagur.service.impl.UserServiceImpl;
+import com.syagur.user.User;
+import com.syagur.user.UserRepository;
+import com.syagur.user.UserService;
+import com.syagur.user.UserServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,25 +26,13 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 public class UserServiceImplIntegrationTest {
 
-    @Autowired
-    private UserService userService;
-
-    @MockBean
-    private UserRepository userRepository;
-
-    @TestConfiguration
-    static class UserServiceImplTestContextConfiguration {
-
-        @Bean
-        public UserService userService() {
-            return new UserServiceImpl();
-        }
-
-    }
-
     private static final Sort SORT = Sort.by(Sort.Direction.ASC, "id");
     private static final Long ADMIN_ID = 1L;
     private static final Long USER_ID = 2L;
+    @Autowired
+    private UserService userService;
+    @MockBean
+    private UserRepository userRepository;
 
     @Test
     public void whenFindAll_thenAllUsersShouldVeFound() {
@@ -89,5 +78,15 @@ public class UserServiceImplIntegrationTest {
         users.add(user1);
         users.add(user2);
         return users;
+    }
+
+    @TestConfiguration
+    static class UserServiceImplTestContextConfiguration {
+
+        @Bean
+        public UserService userService() {
+            return new UserServiceImpl();
+        }
+
     }
 }

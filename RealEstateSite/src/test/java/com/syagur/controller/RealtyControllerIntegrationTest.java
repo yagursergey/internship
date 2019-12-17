@@ -2,8 +2,9 @@ package com.syagur.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.syagur.dto.RealtyDto;
-import com.syagur.entity.enums.RealtyType;
+import com.syagur.realty.RealtyController;
+import com.syagur.realty.RealtyDto;
+import com.syagur.realty.RealtyType;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -34,17 +35,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 public class RealtyControllerIntegrationTest {
 
-    @Autowired
-    private MockMvc mockMvc;
-
-    @Autowired
-    private RealtyController realtyController;
-
     private static final int LIST_SIZE = 1;
     private static final String PATH = "/realties";
     private static final int ID_OF_DELETED_REALTY = 2;
     private static final int ID_OF_NOT_DELETED_REALTY = 1;
     private static final String OWNER_FIRST_NAME = "Fname of User#TEST";
+    @Autowired
+    private MockMvc mockMvc;
+    @Autowired
+    private RealtyController realtyController;
 
     @Test
     void assertThatControllerIsNotNull() {

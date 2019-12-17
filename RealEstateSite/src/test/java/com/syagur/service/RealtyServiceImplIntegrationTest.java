@@ -1,9 +1,10 @@
 package com.syagur.service;
 
-import com.syagur.entity.Realty;
-import com.syagur.entity.User;
-import com.syagur.repository.RealtyRepository;
-import com.syagur.service.impl.RealtyServiceImpl;
+import com.syagur.realty.Realty;
+import com.syagur.realty.RealtyRepository;
+import com.syagur.realty.RealtyService;
+import com.syagur.realty.RealtyServiceImpl;
+import com.syagur.user.User;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,39 +28,26 @@ import static org.mockito.Mockito.when;
 @RunWith(SpringRunner.class)
 public class RealtyServiceImplIntegrationTest {
 
-    @Autowired
-    private RealtyService realtyService;
-
-    @MockBean
-    private RealtyRepository realtyRepository;
-
-    @TestConfiguration
-    static class RealtyServiceImplTestContextConfiguration {
-
-        @Bean
-        public RealtyService realtyService() {
-            return new RealtyServiceImpl();
-        }
-
-    }
-
     private static final Long USER_ID = 2L;
     private static final Long REALTY_ID = 1L;
     private static final boolean REALTY_IS_DELETED = true;
     private static final boolean REALTY_IS_NOT_DELETED = false;
-
     private static final Sort SORT = Sort.by(Sort.Direction.ASC, "id");
+    @Autowired
+    private RealtyService realtyService;
+    @MockBean
+    private RealtyRepository realtyRepository;
 
     @Test
     public void whenFindAllNotDeleted_thenAllNotDeletedRealtiesShouldBeFound() {
-        List<Realty> realtyList = getRealtyList();
-        realtyList.get(0).setDeleted(REALTY_IS_NOT_DELETED);
+        Optional<List<Realty>> realtyList = Optional.of(getRealtyList());
+        realtyList.get().get(0).setDeleted(REALTY_IS_NOT_DELETED);
 
         when(realtyRepository.findByIsDeletedFalse(SORT)).thenReturn(realtyList);
 
         List<Realty> realties = realtyService.findAllNotDeletedAndSort(SORT);
 
-        assertThat(realtyList.size())
+        assertThat(realtyList.get().size())
                 .isEqualTo(realties.size());
         assertFalse(realties.get(0).isDeleted());
     }
@@ -83,14 +71,14 @@ public class RealtyServiceImplIntegrationTest {
 
     @Test
     public void whenGetAllDeleted_thenAllDeletedRealtiesShouldBeFound() {
-        List<Realty> realtyList = getRealtyList();
-        realtyList.get(0).setDeleted(REALTY_IS_DELETED);
+        Optional<List<Realty>> realtyList = Optional.of(getRealtyList());
+        realtyList.get().get(0).setDeleted(REALTY_IS_DELETED);
 
         when(realtyRepository.findByIsDeletedTrue(SORT)).thenReturn(realtyList);
 
         List<Realty> realties = realtyService.getAllDeleted(SORT);
 
-        assertThat(realtyList.size())
+        assertThat(realtyList.get().size())
                 .isEqualTo(realties.size());
         assertTrue(realties.get(0).isDeleted());
     }
@@ -121,5 +109,15 @@ public class RealtyServiceImplIntegrationTest {
         realtyList.add(realty);
 
         return realtyList;
+    }
+
+    @TestConfiguration
+    static class RealtyServiceImplTestContextConfiguration {
+
+        @Bean
+        public RealtyService realtyService() {
+            return new RealtyServiceImpl();
+        }
+
     }
 }

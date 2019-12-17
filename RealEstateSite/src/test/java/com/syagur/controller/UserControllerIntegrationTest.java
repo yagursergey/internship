@@ -1,5 +1,6 @@
 package com.syagur.controller;
 
+import com.syagur.user.UserController;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -25,15 +26,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser(username = "admin#TEST@mail.com", authorities = "ADMIN")
 public class UserControllerIntegrationTest {
 
-    @Autowired
-    MockMvc mockMvc;
-
-    @Autowired
-    UserController userController;
-
     private static final int LIST_SIZE = 2;
     private static final String PATH = "/users";
     private static final String EMAIL = "admin#TEST@mail.com";
+    @Autowired
+    MockMvc mockMvc;
+    @Autowired
+    UserController userController;
 
     @Test
     void assertThatControllerIsNotNull() {

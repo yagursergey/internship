@@ -1,7 +1,8 @@
 package com.syagur.repository;
 
-import com.syagur.entity.Realty;
-import com.syagur.entity.User;
+import com.syagur.realty.Realty;
+import com.syagur.realty.RealtyRepository;
+import com.syagur.user.User;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,14 +22,11 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestPropertySource("/application-test.properties")
 public class RealtyRepositoryIntegrationTest {
 
+    private static final Long USER_ID = 2L;
     @Autowired
     private TestEntityManager entityManager;
-
     @Autowired
     private RealtyRepository realtyRepository;
-
-    private static final Long USER_ID = 2L;
-
     private Sort sort = Sort.by(Sort.Direction.ASC, "id");
 
     @Test
@@ -44,7 +42,7 @@ public class RealtyRepositoryIntegrationTest {
     @Test
     public void whenFindByIsDeletedFalse_thenReturnListOfRealties() {
 
-        List<Realty> foundRealties = realtyRepository.findByIsDeletedFalse(sort);
+        List<Realty> foundRealties = realtyRepository.findByIsDeletedFalse(sort).get();
 
         assertFalse(foundRealties.get(0).isDeleted());
 
@@ -53,7 +51,7 @@ public class RealtyRepositoryIntegrationTest {
     @Test
     public void whenFindByIsDeletedTrue_thenReturnListOfRealties() {
 
-        List<Realty> foundRealties = realtyRepository.findByIsDeletedTrue(sort);
+        List<Realty> foundRealties = realtyRepository.findByIsDeletedTrue(sort).get();
 
         assertTrue(foundRealties.get(0).isDeleted());
     }

@@ -1,6 +1,7 @@
 package com.syagur.repository;
 
-import com.syagur.entity.User;
+import com.syagur.user.User;
+import com.syagur.user.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,14 +20,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @TestPropertySource("/application-test.properties")
 public class UserRepositoryIntegrationTest {
 
+    private static final String USER_EMAIL = "user#TEST@mail.com";
     @Autowired
     TestEntityManager entityManager;
-
     @Autowired
     UserRepository userRepository;
-
-    private static final String USER_EMAIL = "user#TEST@mail.com";
-
 
     @Test
     public void whenFindUserByEmail_thenReturnUser() {
