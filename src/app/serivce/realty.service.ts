@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Realty } from '../model/Realty';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { Pageable } from '../model/Pageable';
+import { ParamSet } from '../model/ParamSet';
 
 const apiUrl = 'http://localhost:8080/api/v1/realties';
 
@@ -12,36 +13,6 @@ const apiUrl = 'http://localhost:8080/api/v1/realties';
 export class RealtyService {
 
   constructor(private http: HttpClient) { }
-
-  getAllRealties(): Observable<Realty[]> {
-    return this.http.get<Realty[]>(apiUrl)
-      .pipe(
-        tap(_ => this.log('fetched Realty')),
-        catchError(this.handleError('getRealties', []))
-      );
-  }
-
-  getMyRealties(): Observable<Realty[]> {
-    return this.http.get<Realty[]>(apiUrl + '/my')
-      .pipe(
-        tap(_ => this.log('fetched Realty')),
-        catchError(this.handleError('getMyRealties', []))
-      );
-  }
-
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-
-      console.error(error); 
-      this.log(`${operation} failed: ${error.message}`);
-
-      return of(result as T);
-    };
-  }
-
-  private log(message: string) {
-    console.log(message);
-  }
 
   public save(realty: any): Observable<any> {
     return this.http.post<Realty>(apiUrl, realty);
@@ -59,28 +30,31 @@ export class RealtyService {
     return this.http.get<Realty>(apiUrl + '/' + id);
   }
 
-  sortByValue(value: string, by: string): Observable<Realty[]> {
-    let params = new HttpParams().set("orderValue",value).set("orderBy", by);
-    return this.http.get<Realty[]>(apiUrl, {params: params});
-  }
-
-  sortByValueMy(value: string, by: string): Observable<Realty[]> {
-    let params = new HttpParams().set("orderValue",value).set("orderBy", by);
-    return this.http.get<Realty[]>(apiUrl + '/my', {params: params});
-  }
-
-  sortByValueDel(value: string, by: string): Observable<Realty[]> {
-    let params = new HttpParams().set("orderValue",value).set("orderBy", by);
-    return this.http.get<Realty[]>(apiUrl + '/deleted', {params: params});
-  }
-
   public deleteById(id: string): Observable<Realty> {
     return this.http.delete<Realty>(apiUrl + '/' + id);
   }
 
   undelete(id: string): Observable<any> {
-    console.log(apiUrl + '/deleted/' + id)
     return this.http.patch<any>(apiUrl + '/deleted/' + id, '');
+  }
+
+  getDeletedRealties(params: ParamSet): Observable<Pageable> {
+    return this.http.get<Pageable>(apiUrl + '/deleted', {params: this.getParams(params)});
+  }
+
+  getMyRealties(params: ParamSet): Observable<Pageable> {
+    return this.http.get<Pageable>(apiUrl + '/my', {params: this.getParams(params)});
+  }
+
+  getAllRealties(params: ParamSet): Observable<Pageable> {
+    return this.http.get<Pageable>(apiUrl, {params: this.getParams(params)});
+  }
+
+  private getParams(params: ParamSet) {
+    return new HttpParams()
+    .set("sortBy", params.value)
+    .set("sortWith", params.with)
+    .set("pageNum", params.pageNum);
   }
 
 }

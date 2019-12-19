@@ -3,6 +3,8 @@ import { Realty } from 'src/app/model/Realty';
 import { Router, ActivatedRoute } from '@angular/router';
 import { RealtyService } from 'src/app/serivce/realty.service';
 import { MatTableDataSource, MatPaginator } from '@angular/material';
+import { Pageable } from 'src/app/model/Pageable';
+import { ParamSet } from 'src/app/model/ParamSet';
 
 @Component({
   selector: 'app-realties.deleted.list',
@@ -14,41 +16,27 @@ export class RealtiesDeletedListComponent implements OnInit {
   id: string;
   realties: Realty[];
   displayedColumns: string[] = ['id', 'price', 'square', 'type', 'overview', 'undelete'];
-  isASC: boolean;
+  isASC = true;
   dataSource: MatTableDataSource<Realty>;
+  pageable: Pageable;
+  params: ParamSet;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(
     private router: Router,
-    private realtyService: RealtyService,
+    private service: RealtyService,
     private route: ActivatedRoute
   ) {
     this.route.paramMap.subscribe( params => this.id = params.get('id'));
-    this.isASC = false;
+    this.params = new ParamSet();
+    this.setDefaultParams();
   }
 
   ngOnInit() {
-    this.realtyService.findAllDeleted().subscribe( data => {
-      this.realties = data;
-      this.updateTable();
+    this.service.getAllRealties(this.params).subscribe( data => {
+      this.setData(data);
     });
-    console.log(this.realties);
-  }
-
-  sort(value: string) {
-    console.log(value);
-    if (this.isASC) {
-      this.realtyService.sortByValueDel(value, 'ASC').subscribe( data => {
-        this.realties = data;
-      })
-    } else {
-      this.realtyService.sortByValueDel(value, 'DESC').subscribe( data => {
-        this.realties = data;
-      })
-    }
-    this.updateTable();
-    this.isASC = !this.isASC;
   }
 
   logout() {
@@ -69,13 +57,51 @@ export class RealtiesDeletedListComponent implements OnInit {
   }
 
   undelete(id: string) {
-      this.realtyService.undelete(id).subscribe( res => console.log(res));
+      this.service.undelete(id).subscribe( res => console.log(res));
       window.location.reload();
   }
 
-  updateTable() {
+  getRealties(value: string) {
+    this.isASC = !this.isASC;
+    this.setQueryParams(null, value);
+    this.service.getAllRealties(this.params).subscribe( data => {
+      this.setData(data);
+    });
+  }
+
+  handlePage(event) {
+    this.setQueryParams(event,null);
+    this.service.getAllRealties(this.params).subscribe( data => {
+      this.setData(data);
+    });
+  }
+
+  private setQueryParams(event, value: string) {
+    if(event != null) {
+      this.params.pageNum = event.pageIndex;
+    }
+    if(value != null) {
+      this.params.value = value;
+    }
+    if(this.isASC) {
+      this.params.with = "ASC";
+    } else {
+      this.params.with = "DESC";
+    }
+
+  }
+
+  private setDefaultParams() {
+      this.params.pageNum = "0";
+      this.params.value = "id";
+      this.params.with = "ASC";
+  }
+
+  private setData(data) {
+    this.pageable = data;
+    this.realties = data.content;
     this.dataSource = new MatTableDataSource(this.realties);
-    this.dataSource.paginator = this.paginator;
+    this.paginator.length = this.pageable.totalElements;
   }
 
   applyFilter(filterValue: string) {

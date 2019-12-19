@@ -33,7 +33,8 @@ import { RealtyOverviewComponent } from './components/realty.overview/realty.ove
 import { UsersAllComponent } from './components/users.all/users.all.component';
 import { UserOverviewComponent } from './components/user.overview/user.overview.component';
 import { RealtiesDeletedListComponent } from './components/realties.deleted.list/realties.deleted.list.component';
-import { LightsComponent } from './components/lights/lights.component'
+import { LightsComponent } from './components/lights/lights.component';
+
 
 @NgModule({
   declarations: [
@@ -48,7 +49,7 @@ import { LightsComponent } from './components/lights/lights.component'
     RealtyEditingComponent,
     RealtyOverviewComponent,
     RealtiesDeletedListComponent,
-    LightsComponent
+    LightsComponent,
   ],
   imports: [
     BrowserModule,

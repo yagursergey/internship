@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { Realty } from 'src/app/model/Realty';
 import { RealtyService } from 'src/app/serivce/realty.service';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { Pageable } from 'src/app/model/Pageable';
+import { ParamSet } from 'src/app/model/ParamSet';
 
 @Component({
   selector: 'app-realties-all-list',
@@ -13,55 +15,38 @@ export class RealtiesAllListComponent implements OnInit {
 
   dataSource: MatTableDataSource<Realty>;
   realties: Realty[];
+  pageable: Pageable;
+  params: ParamSet;
   displayedColumns: string[] = ['id', 'price', 'square', 'type', 'overview'];
-  isVisibleForUser: boolean;
-  isVisibleForAdmin: boolean;
-  isASC: boolean;
-  role: string;
+  isVisible = false;
+  isASC = true;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(
     private router: Router,
-    private realtyService: RealtyService
+    private service: RealtyService
     ) {
-      this.isVisibleForUser = false;
-      this.isVisibleForAdmin = false;
-      this.isASC = false;
-      this.role = localStorage.getItem('role');
+      this.params = new ParamSet();
+      this.setDefaultParams();
+      this.checkRole();
   }
 
   ngOnInit() {
-    this.realtyService.getAllRealties().subscribe( data => {
-      this.realties = data;
-      this.updateTable();
+    this.service.getAllRealties(this.params).subscribe( data => {
+      this.setData(data);
     });
-    this.checkRoleAndRenderElements();
   }
 
-  checkRoleAndRenderElements() {
-    if (this.role == "USER") {
-      this.isVisibleForUser = true;
-    } else {
-      this.isVisibleForAdmin = true;
+
+  checkRole() {
+    let role = localStorage.getItem('role');
+    if(role == 'ADMIN') {
+      this.isVisible = true;
     }
-    console.log(this.isVisibleForAdmin + ' \\\ ' + this.isVisibleForUser);
   }
 
-  sort(value: string) {
-    console.log(value);
-    if (this.isASC) {
-      this.realtyService.sortByValue(value, 'ASC').subscribe( data => {
-        this.realties = data;
-      })
-    } else {
-      this.realtyService.sortByValue(value, 'DESC').subscribe( data => {
-        this.realties = data;
-      })
-    }
-    this.updateTable();
-    this.isASC = !this.isASC;
-  }
+  
 
   logout() {
     localStorage.removeItem('token');
@@ -88,12 +73,51 @@ export class RealtiesAllListComponent implements OnInit {
     this.router.navigate(['/deleted']);
   }
 
-  updateTable() {
+  getRealties(value: string) {
+    this.isASC = !this.isASC;
+    this.setQueryParams(null, value);
+    this.service.getAllRealties(this.params).subscribe( data => {
+      this.setData(data);
+    });
+  }
+
+  handlePage(event) {
+    this.setQueryParams(event,null);
+    this.service.getAllRealties(this.params).subscribe( data => {
+      this.setData(data);
+    });
+  }
+
+  private setQueryParams(event, value: string) {
+    if(event != null) {
+      this.params.pageNum = event.pageIndex;
+    }
+    if(value != null) {
+      this.params.value = value;
+    }
+    if(this.isASC) {
+      this.params.with = "ASC";
+    } else {
+      this.params.with = "DESC";
+    }
+
+  }
+
+  private setDefaultParams() {
+      this.params.pageNum = "0";
+      this.params.value = "id";
+      this.params.with = "ASC";
+  }
+
+  private setData(data) {
+    this.pageable = data;
+    this.realties = data.content;
     this.dataSource = new MatTableDataSource(this.realties);
-    this.dataSource.paginator = this.paginator;
+    this.paginator.length = this.pageable.totalElements;
   }
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
 }

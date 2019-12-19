@@ -3,6 +3,8 @@ import { Realty } from 'src/app/model/Realty';
 import { Router } from '@angular/router';
 import { RealtyService } from 'src/app/serivce/realty.service';
 import { MatTableDataSource, MatPaginator } from '@angular/material';
+import { ParamSet } from 'src/app/model/ParamSet';
+import { Pageable } from 'src/app/model/Pageable';
 
 @Component({
   selector: 'app-realties-my-list',
@@ -14,63 +16,89 @@ export class RealtiesMyListComponent implements OnInit {
   dataSource: MatTableDataSource<Realty>;
   realties: Realty[];
   displayedColumns: string[] = ['id', 'price', 'square', 'type', 'overview'];
-  isASC: boolean;
+  isASC = true;
+  pageable: Pageable;
+  params: ParamSet;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
-  constructor(private router: Router, private realtyService: RealtyService) {
-    this.isASC = false;
+  constructor(
+    private router: Router,
+    private service: RealtyService
+    ) {
+      this.params = new ParamSet();
+      this.setDefaultParams();
   }
 
   ngOnInit() {
- 
-    this.realtyService.getMyRealties().subscribe( data => {
-      this.realties = data;
-      this.updateTable();
+    this.service.getMyRealties(this.params).subscribe( data => {
+      this.setData(data);
     });
-    console.log(this.realties);
   }
 
-  sort(value: string) {
-    console.log(value);
-    if (this.isASC) {
-      this.realtyService.sortByValueMy(value, 'ASC').subscribe( data => {
-        this.realties = data;
-      })
-    } else {
-      this.realtyService.sortByValueMy(value, 'DESC').subscribe( data => {
-        this.realties = data;
-      })
-    }
-    this.updateTable();
+  getRealties(value: string) {
     this.isASC = !this.isASC;
+    this.setQueryParams(null, value);
+    this.service.getMyRealties(this.params).subscribe( data => {
+      this.setData(data);
+    });
   }
 
-logout() {
-  localStorage.removeItem('token');
-  this.router.navigate(['login']);
-}
+  handlePage(event) {
+    this.setQueryParams(event,null);
+    this.service.getMyRealties(this.params).subscribe( data => {
+      this.setData(data);
+    });
+  }
 
-goToRealtiesAll() {
-  this.router.navigate(['/realties/all']);
-}
+  private setQueryParams(event, value: string) {
+    if(event != null) {
+      this.params.pageNum = event.pageIndex;
+    }
+    if(value != null) {
+      this.params.value = value;
+    }
+    if(this.isASC) {
+      this.params.with = "ASC";
+    } else {
+      this.params.with = "DESC";
+    }
 
-goToRealtiesCreate() {
-  this.router.navigate(['/realties/new']);
-}
+  }
 
-goToRealtyOverview(id: string) {
-  localStorage.setItem('isOwner', 'true');
-  this.router.navigate(['/realties/' + id]);
-}
+  private setDefaultParams() {
+      this.params.pageNum = "0";
+      this.params.value = "id";
+      this.params.with = "ASC";
+  }
 
-updateTable() {
-  this.dataSource = new MatTableDataSource(this.realties);
-  this.dataSource.paginator = this.paginator;
-}
+  private setData(data) {
+    this.pageable = data;
+    this.realties = data.content;
+    this.dataSource = new MatTableDataSource(this.realties);
+    this.paginator.length = this.pageable.totalElements;
+  }
 
-applyFilter(filterValue: string) {
-  this.dataSource.filter = filterValue.trim().toLowerCase();
-}
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    this.router.navigate(['login']);
+  }
+
+  goToRealtiesAll() {
+    this.router.navigate(['/realties/all']);
+  }
+
+  goToRealtiesCreate() {
+    this.router.navigate(['/realties/new']);
+  }
+
+  goToRealtyOverview(id: string) {
+    localStorage.setItem('isOwner', 'true');
+    this.router.navigate(['/realties/' + id ]);
+  }
 
 }

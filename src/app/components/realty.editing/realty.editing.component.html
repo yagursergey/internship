@@ -22,7 +22,8 @@
     <form class="example-container" [formGroup]="realtyForm" (ngSubmit)="onFormSubmit(realtyForm.value)">
 
         <mat-form-field class="example-full-width">
-            <input matInput type="price" placeholder="Price" formControlName="price" [errorStateMatcher]="matcher">
+            <input matInput type="price" placeholder="Price" 
+            formControlName="price" [errorStateMatcher]="matcher">
             <mat-error>
                 <span *ngIf="!realtyForm.get('price').valid && realtyForm.get('price').touched">Please enter
                     current price</span>
@@ -30,7 +31,8 @@
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
-            <input matInput type="square" placeholder="Square" formControlName="square" [errorStateMatcher]="matcher">
+            <input matInput type="square" placeholder="Square" 
+            formControlName="square" [errorStateMatcher]="matcher">
             <mat-error>
                 <span *ngIf="!realtyForm.get('square').valid && realtyForm.get('square').touched">Please enter
                     current square</span>
@@ -46,8 +48,8 @@
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
-            <input matInput type="description" placeholder="Description" formControlName="description"
-                [errorStateMatcher]="matcher">
+            <input matInput type="description" placeholder="Description" 
+            formControlName="description" [errorStateMatcher]="matcher">
             <mat-error>
                 <span *ngIf="!realtyForm.get('description').valid && realtyForm.get('description').touched">Please
                     enter

@@ -6,13 +6,13 @@
 
       <div class="halfBlock spaceAround">
         <h3>All Realties</h3>
-        <button [style.display]="isVisibleForAdmin ? 'none' : 'block'" mat-raised-button (click)="goToRealtiesMy()">My
+        <button [style.display]="isVisible ? 'none' : 'block'" mat-raised-button (click)="goToRealtiesMy()">My
           Realties</button>
-        <button [style.display]="isVisibleForUser ? 'none' : 'block'" mat-raised-button (click)="goToUsersAll()">All
+        <button [style.display]="isVisible ? 'block' : 'none'" mat-raised-button (click)="goToUsersAll()">All
           Users</button>
-        <button [style.display]="isVisibleForAdmin ? 'none' : 'block'" mat-raised-button
-          (click)="goToRealtiesCreate()">Create new</button>
-        <button [style.display]="isVisibleForUser ? 'none' : 'block'" mat-raised-button
+        <button [style.display]="isVisible ? 'none' : 'block'" mat-raised-button (click)="goToRealtiesCreate()">Create
+          new</button>
+        <button [style.display]="isVisible ? 'block' : 'none'" mat-raised-button
           (click)="goToRealtiesDeletedList()">Deleted Realties</button>
       </div>
       <div class="halfBlock rowReverse">
@@ -30,19 +30,19 @@
 
     <table mat-table [dataSource]="dataSource">
       <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef> <button mat-button (click)="sort('id')">Id</button> </th>
+        <th mat-header-cell *matHeaderCellDef> <button mat-button (click)="getRealties('id')">Id</button> </th>
         <td mat-cell *matCellDef="let row"> {{row.id}} </td>
       </ng-container>
       <ng-container matColumnDef="price">
-        <th mat-header-cell *matHeaderCellDef> <button mat-button (click)="sort('price')">Price</button> </th>
+        <th mat-header-cell *matHeaderCellDef> <button mat-button (click)="getRealties('price')">Price</button> </th>
         <td mat-cell *matCellDef="let row"> {{row.price}} </td>
       </ng-container>
       <ng-container matColumnDef="square">
-        <th mat-header-cell *matHeaderCellDef> <button mat-button (click)="sort('square')">Square</button> </th>
+        <th mat-header-cell *matHeaderCellDef> <button mat-button (click)="getRealties('square')">Square</button> </th>
         <td mat-cell *matCellDef="let row"> {{row.square}} </td>
       </ng-container>
       <ng-container matColumnDef="type">
-        <th mat-header-cell *matHeaderCellDef> <button mat-button (click)="sort('type')">Type</button> </th>
+        <th mat-header-cell *matHeaderCellDef> <button mat-button (click)="getRealties('type')">Type</button> </th>
         <td mat-cell *matCellDef="let row"> {{row.type}} </td>
       </ng-container>
       <ng-container matColumnDef="overview">
@@ -54,6 +54,8 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    <mat-paginator [pageSizeOptions]="[10]" showFirstLastButtons></mat-paginator>
+    <mat-paginator [pageSizeOptions]="[10]" (page)="pageEvent = handlePage($event)" [showFirstLastButtons]="false">
+    </mat-paginator>
+
   </div>
 </div>

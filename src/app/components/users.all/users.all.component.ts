@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { UserService } from 'src/app/serivce/user.service';
 import { User } from 'src/app/model/User';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { Pageable } from 'src/app/model/Pageable';
+import { ParamSet } from 'src/app/model/ParamSet';
 
 @Component({
   selector: 'app-users.all',
@@ -11,40 +13,27 @@ import { MatPaginator, MatTableDataSource } from '@angular/material';
 })
 export class UsersAllComponent implements OnInit {
 
+  pageable: Pageable;
+  params: ParamSet;
   users: User[];
   displayedColumns: string[] = ['id', 'email', 'firstName', 'secondName', 'role', 'overview'];
-  isASC: boolean;
+  isASC = true;
   dataSource: MatTableDataSource<User>;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(
     private router: Router,
-    private userService: UserService) {
-      this.isASC = false;
+    private service: UserService
+    ) {
+      this.params = new ParamSet();
+      this.setDefaultParams();
     }
 
   ngOnInit() {
-    this.userService.getAllUsers().subscribe( data => {
-      this.users = data;
-      this.updateTable();
+    this.service.getAllUsers(this.params).subscribe( data => {
+      this.setData(data);
     });
-    console.log(this.users);
-  }
-
-  sort(value: string) {
-    console.log(value);
-    if (this.isASC) {
-      this.userService.sortByValue(value, 'ASC').subscribe( data => {
-        this.users = data;
-      })
-    } else {
-      this.userService.sortByValue(value, 'DESC').subscribe( data => {
-        this.users = data;
-      })
-    }
-    this.updateTable();
-    this.isASC = !this.isASC;
   }
 
   logout() {
@@ -64,10 +53,49 @@ export class UsersAllComponent implements OnInit {
     this.router.navigate(['/deleted']);
   }
 
-  updateTable() {
-    this.dataSource = new MatTableDataSource(this.users);
-    this.dataSource.paginator = this.paginator;
+  getUsers(value: string) {
+    this.isASC = !this.isASC;
+    this.setQueryParams(null, value);
+    this.service.getAllUsers(this.params).subscribe( data => {
+      this.setData(data);
+    });
   }
+
+  handlePage(event) {
+    this.setQueryParams(event,null);
+    this.service.getAllUsers(this.params).subscribe( data => {
+      this.setData(data);
+    });
+  }
+
+  private setQueryParams(event, value: string) {
+    if(event != null) {
+      this.params.pageNum = event.pageIndex;
+    }
+    if(value != null) {
+      this.params.value = value;
+    }
+    if(this.isASC) {
+      this.params.with = "ASC";
+    } else {
+      this.params.with = "DESC";
+    }
+
+  }
+
+  private setDefaultParams() {
+      this.params.pageNum = "0";
+      this.params.value = "id";
+      this.params.with = "ASC";
+  }
+
+  private setData(data) {
+    this.pageable = data;
+    this.users = data.content;
+    this.dataSource = new MatTableDataSource(this.users);
+    this.paginator.length = this.pageable.totalElements;
+  }
+
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
