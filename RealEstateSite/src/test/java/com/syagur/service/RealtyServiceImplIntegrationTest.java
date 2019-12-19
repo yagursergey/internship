@@ -3,16 +3,13 @@ package com.syagur.service;
 import com.syagur.realty.Realty;
 import com.syagur.realty.RealtyRepository;
 import com.syagur.realty.RealtyService;
-import com.syagur.realty.RealtyServiceImpl;
 import com.syagur.user.User;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Bean;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
@@ -28,11 +25,12 @@ import static org.mockito.Mockito.when;
 @RunWith(SpringRunner.class)
 public class RealtyServiceImplIntegrationTest {
 
+    private static final Integer TOTAL_ELEMENTS = 1;
     private static final Long USER_ID = 2L;
     private static final Long REALTY_ID = 1L;
-    private static final boolean REALTY_IS_DELETED = true;
-    private static final boolean REALTY_IS_NOT_DELETED = false;
-    private static final Sort SORT = Sort.by(Sort.Direction.ASC, "id");
+    private static final Pageable PAGEABLE = PageRequest.of(0, 10, Sort.by(Sort.Direction.ASC, "id"));
+    private static final boolean DELETED = true;
+
     @Autowired
     private RealtyService realtyService;
     @MockBean
@@ -40,47 +38,47 @@ public class RealtyServiceImplIntegrationTest {
 
     @Test
     public void whenFindAllNotDeleted_thenAllNotDeletedRealtiesShouldBeFound() {
-        Optional<List<Realty>> realtyList = Optional.of(getRealtyList());
-        realtyList.get().get(0).setDeleted(REALTY_IS_NOT_DELETED);
+        Optional<Page<Realty>> realtyListOptional = getRealtyOptionalPage();
 
-        when(realtyRepository.findByIsDeletedFalse(SORT)).thenReturn(realtyList);
+        when(realtyRepository.findByIsDeletedFalse(PAGEABLE)).thenReturn(realtyListOptional);
 
-        List<Realty> realties = realtyService.findAllNotDeletedAndSort(SORT);
+        Page<Realty> realties = realtyService.findAllNotDeleted(PAGEABLE);
+        assertThat(TOTAL_ELEMENTS).isEqualTo(realties.getTotalElements());
+        assertTrue(realties.hasContent());
 
-        assertThat(realtyList.get().size())
-                .isEqualTo(realties.size());
-        assertFalse(realties.get(0).isDeleted());
+        assertFalse(realties.getContent().get(0).isDeleted());
     }
 
     @Test
     public void whenFindByOwnerAndSort_thenAllUsersRealtiesShouldBeFound() {
-        List<Realty> realtyList = getRealtyList();
+        Optional<Page<Realty>> realtyList = getRealtyOptionalPage();
         User owner = new User();
         owner.setId(USER_ID);
 
-        when(realtyRepository.findByOwnerAndIsDeletedFalse(owner, SORT)).thenReturn(Optional.of(realtyList));
+        when(realtyRepository.findByOwnerAndIsDeletedFalse(owner, PAGEABLE)).thenReturn(realtyList);
 
-        List<Realty> realties = realtyService.findByOwnerAndSort(owner, SORT);
+        Page<Realty> realties = realtyService.findByOwner(owner, PAGEABLE);
+        assertThat(TOTAL_ELEMENTS).isEqualTo(realties.getTotalElements());
+        assertTrue(realties.hasContent());
 
-        assertThat(realtyList.size())
-                .isEqualTo(realties.size());
-        assertFalse(realties.get(0).isDeleted());
-        assertThat(USER_ID)
-                .isEqualTo(realties.get(0).getOwner().getId());
+        assertFalse(realties.getContent().get(0).isDeleted());
+
+        Long userId = realties.getContent().get(0).getOwner().getId();
+        assertThat(USER_ID).isEqualTo(userId);
     }
 
     @Test
     public void whenGetAllDeleted_thenAllDeletedRealtiesShouldBeFound() {
-        Optional<List<Realty>> realtyList = Optional.of(getRealtyList());
-        realtyList.get().get(0).setDeleted(REALTY_IS_DELETED);
+        Optional<Page<Realty>> realtyList = getRealtyOptionalPage();
+        realtyList.get().getContent().get(0).setDeleted(DELETED);
 
-        when(realtyRepository.findByIsDeletedTrue(SORT)).thenReturn(realtyList);
+        when(realtyRepository.findByIsDeletedTrue(PAGEABLE)).thenReturn(realtyList);
 
-        List<Realty> realties = realtyService.getAllDeleted(SORT);
+        Page<Realty> realties = realtyService.getAllDeleted(PAGEABLE);
+        assertThat(TOTAL_ELEMENTS).isEqualTo(realties.getTotalElements());
+        assertTrue(realties.hasContent());
 
-        assertThat(realtyList.get().size())
-                .isEqualTo(realties.size());
-        assertTrue(realties.get(0).isDeleted());
+        assertTrue(realties.getContent().get(0).isDeleted());
     }
 
     @Test
@@ -96,7 +94,7 @@ public class RealtyServiceImplIntegrationTest {
                 .isEqualTo(realtyFound.getId());
     }
 
-    private List<Realty> getRealtyList() {
+    private Optional<Page<Realty>> getRealtyOptionalPage() {
         List<Realty> realtyList = new ArrayList<>();
         Realty realty = new Realty();
 
@@ -108,16 +106,6 @@ public class RealtyServiceImplIntegrationTest {
 
         realtyList.add(realty);
 
-        return realtyList;
-    }
-
-    @TestConfiguration
-    static class RealtyServiceImplTestContextConfiguration {
-
-        @Bean
-        public RealtyService realtyService() {
-            return new RealtyServiceImpl();
-        }
-
+        return Optional.of(new PageImpl<>(realtyList));
     }
 }

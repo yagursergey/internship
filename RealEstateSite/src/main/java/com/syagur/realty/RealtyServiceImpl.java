@@ -1,16 +1,15 @@
 package com.syagur.realty;
 
-import com.syagur.exception.exceptions.ResourceNotFoundException;
+import com.syagur.common.exception.exceptions.NoRightsForActionException;
+import com.syagur.common.exception.exceptions.ResourceNotFoundException;
 import com.syagur.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -22,10 +21,8 @@ public class RealtyServiceImpl implements RealtyService {
     private String messageForList;
     @Value("${message.resourceNotFound.realty.one}")
     private String messageForOne;
-
-    public Page<Realty> findAll(Pageable pageable) {
-        return realtyRepository.findAll(pageable);
-    }
+    @Value("${message.noRightsForAction}")
+    private String messageForAction;
 
     @Override
     public Realty findById(Long id) {
@@ -34,20 +31,20 @@ public class RealtyServiceImpl implements RealtyService {
     }
 
     @Override
-    public List<Realty> getAllDeleted(Sort sort) {
-        return realtyRepository.findByIsDeletedTrue(sort)
+    public Page<Realty> getAllDeleted(Pageable pageable) {
+        return realtyRepository.findByIsDeletedTrue(pageable)
                 .orElseThrow(() -> new ResourceNotFoundException(messageForList));
     }
 
     @Override
-    public List<Realty> findByOwnerAndSort(User owner, Sort sort) {
-        return realtyRepository.findByOwnerAndIsDeletedFalse(owner, sort)
+    public Page<Realty> findByOwner(User owner, Pageable pageable) {
+        return realtyRepository.findByOwnerAndIsDeletedFalse(owner, pageable)
                 .orElseThrow(() -> new ResourceNotFoundException(messageForList));
     }
 
     @Override
-    public List<Realty> findAllNotDeletedAndSort(Sort sort) {
-        return realtyRepository.findByIsDeletedFalse(sort)
+    public Page<Realty> findAllNotDeleted(Pageable pageable) {
+        return realtyRepository.findByIsDeletedFalse(pageable)
                 .orElseThrow(() -> new ResourceNotFoundException(messageForList));
     }
 
@@ -74,15 +71,19 @@ public class RealtyServiceImpl implements RealtyService {
     }
 
     @Override
-    public void edit(RealtyDto realtyDto, Long id) {
+    public void edit(Realty realty, User owner) {
+        realty.setOwner(owner);
+        realtyRepository.saveAndFlush(realty);
+    }
 
-        Realty oldRealty = this.findById(id);
-
-        oldRealty.setDescription(realtyDto.getDescription());
-        oldRealty.setType(RealtyType.valueOf(realtyDto.getType()));
-        oldRealty.setSquare(realtyDto.getSquare());
-        oldRealty.setPrice(realtyDto.getPrice());
-
-        realtyRepository.saveAndFlush(oldRealty);
+    @Override
+    public void isOwner(User owner, Long id) {
+        Long ownerId = realtyRepository
+                .getOne(id)
+                .getOwner()
+                .getId();
+        if (!ownerId.equals(owner.getId())) {
+            throw new NoRightsForActionException(messageForAction);
+        }
     }
 }

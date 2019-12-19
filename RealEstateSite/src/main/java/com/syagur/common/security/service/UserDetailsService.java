@@ -3,8 +3,6 @@ package com.syagur.common.security.service;
 import com.syagur.user.User;
 import com.syagur.user.UserRepository;
 import com.syagur.user.UserRole;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -26,7 +24,7 @@ public class UserDetailsService implements org.springframework.security.core.use
     private final UserRepository userRepository;
 
     @Autowired
-    private  PasswordEncoder bCryptPasswordEncoder;
+    private PasswordEncoder bCryptPasswordEncoder;
 
     public Optional<User> findUserByEmail(String email) {
         return userRepository.findByEmail(email);

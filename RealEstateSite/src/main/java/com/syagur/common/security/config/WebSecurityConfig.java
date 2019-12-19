@@ -3,7 +3,6 @@ package com.syagur.common.security.config;
 import com.syagur.common.security.jwt.JwtConfig;
 import com.syagur.common.security.jwt.JwtTokenProvider;
 import com.syagur.common.security.service.UserDetailsService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -42,7 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.httpBasic().disable()
                 .csrf().disable().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
-                .antMatchers("/swagger-resources/**", "/v2/api-docs", "/configuration/**", "/webjars/**","/swagger*/**").permitAll()
+                .antMatchers("/swagger-resources/**", "/v2/api-docs", "/configuration/**", "/webjars/**", "/swagger*/**").permitAll()
                 .antMatchers("/login").permitAll().antMatchers("/register").permitAll()
                 .antMatchers(HttpMethod.GET, "/realties/").hasAnyAuthority("ADMIN", "USER")
                 .antMatchers(HttpMethod.POST, "/realties/").hasAuthority("USER")

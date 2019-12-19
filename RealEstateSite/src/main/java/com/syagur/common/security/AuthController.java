@@ -1,9 +1,9 @@
 package com.syagur.common.security;
 
-import com.syagur.common.util.Converter;
-import com.syagur.exception.exceptions.ResourceNotFoundException;
+import com.syagur.common.exception.exceptions.ResourceNotFoundException;
 import com.syagur.common.security.jwt.JwtTokenProvider;
 import com.syagur.common.security.service.UserDetailsService;
+import com.syagur.common.util.Converter;
 import com.syagur.user.User;
 import com.syagur.user.UserDto;
 import com.syagur.user.UserRole;

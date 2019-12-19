@@ -30,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @RunWith(SpringRunner.class)
-@TestPropertySource("/application-test.properties")
+@TestPropertySource("/application-test.yml")
 @WithMockUser(username = "user#TEST@mail.com", authorities = "USER")
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 public class RealtyControllerIntegrationTest {
@@ -56,8 +56,8 @@ public class RealtyControllerIntegrationTest {
         this.mockMvc.perform(get(PATH))
                 .andExpect(authenticated())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].id", Matchers.is(ID_OF_NOT_DELETED_REALTY)))
-                .andExpect(jsonPath("$", hasSize(LIST_SIZE)));
+                .andExpect(jsonPath("$.content[0].id", Matchers.is(ID_OF_NOT_DELETED_REALTY)))
+                .andExpect(jsonPath("$.content", hasSize(LIST_SIZE)));
 
     }
 
@@ -67,9 +67,9 @@ public class RealtyControllerIntegrationTest {
         this.mockMvc.perform(get(PATH + "/my"))
                 .andExpect(authenticated())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].id", Matchers.is(ID_OF_NOT_DELETED_REALTY)))
-                .andExpect(jsonPath("$", hasSize(LIST_SIZE)))
-                .andExpect(jsonPath("$[0].ownerFirstName", Matchers.is(OWNER_FIRST_NAME)));
+                .andExpect(jsonPath("$.content[0].id", Matchers.is(ID_OF_NOT_DELETED_REALTY)))
+                .andExpect(jsonPath("$.content", hasSize(LIST_SIZE)))
+                .andExpect(jsonPath("$.content[0].ownerFirstName", Matchers.is(OWNER_FIRST_NAME)));
     }
 
     @Test
@@ -79,8 +79,8 @@ public class RealtyControllerIntegrationTest {
         this.mockMvc.perform(get(PATH + "/deleted"))
                 .andExpect(authenticated())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].id", Matchers.is(ID_OF_DELETED_REALTY)))
-                .andExpect(jsonPath("$", hasSize(LIST_SIZE)));
+                .andExpect(jsonPath("$.content[0].id", Matchers.is(ID_OF_DELETED_REALTY)))
+                .andExpect(jsonPath("$.content", hasSize(LIST_SIZE)));
 
     }
 

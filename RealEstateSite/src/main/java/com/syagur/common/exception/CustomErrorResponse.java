@@ -1,4 +1,4 @@
-package com.syagur.exception;
+package com.syagur.common.exception;
 
 import java.time.LocalDateTime;
 

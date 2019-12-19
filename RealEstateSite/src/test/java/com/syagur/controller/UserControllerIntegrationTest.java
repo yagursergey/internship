@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @RunWith(SpringRunner.class)
-@TestPropertySource("/application-test.properties")
+@TestPropertySource("/application-test.yml")
 @WithMockUser(username = "admin#TEST@mail.com", authorities = "ADMIN")
 public class UserControllerIntegrationTest {
 
@@ -44,7 +44,7 @@ public class UserControllerIntegrationTest {
         this.mockMvc.perform(get(PATH))
                 .andExpect(authenticated())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(LIST_SIZE)));
+                .andExpect(jsonPath("$.content", hasSize(LIST_SIZE)));
     }
 
     @Test

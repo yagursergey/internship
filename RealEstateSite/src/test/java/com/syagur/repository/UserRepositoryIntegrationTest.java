@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DataJpaTest
 @RunWith(SpringRunner.class)
-@TestPropertySource("/application-test.properties")
+@TestPropertySource("/application-test.yml")
 public class UserRepositoryIntegrationTest {
 
     private static final String USER_EMAIL = "user#TEST@mail.com";

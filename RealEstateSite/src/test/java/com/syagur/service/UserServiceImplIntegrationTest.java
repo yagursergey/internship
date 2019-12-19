@@ -3,15 +3,12 @@ package com.syagur.service;
 import com.syagur.user.User;
 import com.syagur.user.UserRepository;
 import com.syagur.user.UserService;
-import com.syagur.user.UserServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Bean;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
@@ -20,35 +17,39 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class UserServiceImplIntegrationTest {
 
-    private static final Sort SORT = Sort.by(Sort.Direction.ASC, "id");
+    private static final Pageable PAGEABLE = PageRequest.of(0, 10, Sort.by(Sort.Direction.ASC, "id"));
     private static final Long ADMIN_ID = 1L;
     private static final Long USER_ID = 2L;
+    private static final Long TOTAL_ELEMENTS = 2L;
     @Autowired
     private UserService userService;
     @MockBean
     private UserRepository userRepository;
 
     @Test
-    public void whenFindAll_thenAllUsersShouldVeFound() {
-        List<User> userList = getUserList();
+    public void whenFindAll_thenAllUsersShouldBeFound() {
+        Page<User> userList = getUserList();
 
-        when(userRepository.findAll(SORT)).thenReturn(userList);
+        when(userRepository.findAll(PAGEABLE)).thenReturn(userList);
 
-        List<User> users = userService.findAll(SORT);
+        Page<User> users = userService.findAll(PAGEABLE);
 
-        assertNotNull(users);
-        assertThat(userList.size())
-                .isEqualTo(users.size());
-        assertThat(users.get(0).getId())
-                .isEqualTo(ADMIN_ID);
-        assertThat(users.get(1).getId())
-                .isEqualTo(USER_ID);
+        System.out.println(users.getTotalElements());
+        assertTrue(users.hasContent());
+        assertThat(users.getTotalElements())
+                .isEqualTo(TOTAL_ELEMENTS);
+
+        assertThat(users.getContent().get(0).getId())
+                .isEqualTo(ADMIN_ID.intValue());
+        assertThat(users.getContent().get(1).getId())
+                .isEqualTo(USER_ID.intValue());
     }
 
     @Test
@@ -66,7 +67,7 @@ public class UserServiceImplIntegrationTest {
 
     }
 
-    private List<User> getUserList() {
+    private Page<User> getUserList() {
         List<User> users = new ArrayList<>();
 
         User user1 = new User();
@@ -77,16 +78,6 @@ public class UserServiceImplIntegrationTest {
 
         users.add(user1);
         users.add(user2);
-        return users;
-    }
-
-    @TestConfiguration
-    static class UserServiceImplTestContextConfiguration {
-
-        @Bean
-        public UserService userService() {
-            return new UserServiceImpl();
-        }
-
+        return new PageImpl<>(users);
     }
 }

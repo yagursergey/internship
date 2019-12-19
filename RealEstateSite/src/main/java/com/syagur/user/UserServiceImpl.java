@@ -1,12 +1,11 @@
 package com.syagur.user;
 
-import com.syagur.exception.exceptions.ResourceNotFoundException;
+import com.syagur.common.exception.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -18,8 +17,8 @@ public class UserServiceImpl implements UserService {
     private String messageForOne;
 
     @Override
-    public List<User> findAll(Sort sort) {
-        return userRepository.findAll(sort);
+    public Page<User> findAll(Pageable pageable) {
+        return userRepository.findAll(pageable);
     }
 
     @Override

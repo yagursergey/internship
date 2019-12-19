@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2019-12-17T16:50:58+0300",
-    comments = "version: 1.3.1.Final, compiler: javac, environment: Java 11.0.4 (Ubuntu)"
+    date = "2019-12-19T15:20:08+0300",
+    comments = "version: 1.3.1.Final, compiler: javac, environment: Java 11.0.5 (Private Build)"
 )
 @Component
 public class ConverterImpl implements Converter {

@@ -1,16 +1,17 @@
 package com.syagur.realty;
 
-import com.syagur.common.util.Converter;
 import com.syagur.common.security.service.UserDetailsService;
+import com.syagur.common.util.Converter;
 import com.syagur.user.User;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
@@ -26,63 +27,45 @@ public class RealtyController {
 
     private final UserDetailsService userDetailsService;
 
-//  todo ----  This is old endpoint without pagination. Should be removed after work will be done with new;
-    @GetMapping()
-    ResponseEntity<List<RealtyDto>> getAllRealties(
-            @RequestParam(value = "orderValue", defaultValue = "id") String orderValue,
-            @RequestParam(value = "orderBy", defaultValue = "ASC") String sortWith) {
-
-        Sort sort = Sort.by(Sort.Direction.valueOf(sortWith), orderValue);
-
-        List<Realty> realty = realtyService.findAllNotDeletedAndSort(sort);
-        List<RealtyDto> realtyDtos = toRealtyDtosList(realty);
-
-        return ResponseEntity.ok(realtyDtos);
-    }
-
-//    todo ---- This is new endpoint with pagination.
     @GetMapping
     ResponseEntity<Page<RealtyDto>> getAllRealties(
             @RequestParam(value = "pageNum", defaultValue = "0") Integer pageNum,
             @RequestParam(value = "sortBy", defaultValue = "id") String sortBy,
-            @RequestParam(value = "sortWith", defaultValue = "ASC") String sortWith
-    ) {
+            @RequestParam(value = "sortWith", defaultValue = "ASC") String sortWith) {
+
         Pageable pageable = createPageable(pageNum, sortBy, sortWith);
 
-        Page<Realty> realty = realtyService.findAll(pageable);
-
+        Page<Realty> realty = realtyService.findAllNotDeleted(pageable);
         Page<RealtyDto> page = realty.map(converter::toRealtyDto);
 
         return ResponseEntity.ok(page);
     }
 
-    private Pageable createPageable(Integer pageNum, String sortBy, String sortWith) {
-        return  PageRequest.of(pageNum, 10, Sort.by(Sort.Direction.valueOf(sortWith), sortBy));
-    }
-
     @GetMapping("/my")
-    ResponseEntity<List<RealtyDto>> getRealtiesByUserId(
-            @RequestParam(value = "orderValue", defaultValue = "id") String orderValue,
-            @RequestParam(value = "orderBy", defaultValue = "ASC") String orderBy) {
+    ResponseEntity<Page<RealtyDto>> getRealtiesByUserId(
+            @RequestParam(value = "pageNum", defaultValue = "0") Integer pageNum,
+            @RequestParam(value = "sortBy", defaultValue = "id") String sortBy,
+            @RequestParam(value = "sortWith", defaultValue = "ASC") String sortWith) {
 
         User owner = userDetailsService.getAuthenticatedUser();
-        Sort sort = Sort.by(Sort.Direction.valueOf(orderBy), orderValue);
+        Pageable pageable = createPageable(pageNum, sortBy, sortWith);
 
-        List<Realty> realty = realtyService.findByOwnerAndSort(owner, sort);
-        List<RealtyDto> realtyDtos = toRealtyDtosList(realty);
+        Page<Realty> realty = realtyService.findByOwner(owner, pageable);
+        Page<RealtyDto> realtyDtos = realty.map(converter::toRealtyDto);
 
         return ResponseEntity.ok(realtyDtos);
     }
 
     @GetMapping("/deleted")
-    ResponseEntity<List<RealtyDto>> getAllDeletedRealties(
-            @RequestParam(value = "orderValue", defaultValue = "id") String orderValue,
-            @RequestParam(value = "orderBy", defaultValue = "ASC") String orderBy) {
+    ResponseEntity<Page<RealtyDto>> getAllDeletedRealties(
+            @RequestParam(value = "pageNum", defaultValue = "0") Integer pageNum,
+            @RequestParam(value = "sortBy", defaultValue = "id") String sortBy,
+            @RequestParam(value = "sortWith", defaultValue = "ASC") String sortWith) {
 
-        Sort sort = Sort.by(Sort.Direction.valueOf(orderBy), orderValue);
+        Pageable pageable = createPageable(pageNum, sortBy, sortWith);
 
-        List<Realty> realty = realtyService.getAllDeleted(sort);
-        List<RealtyDto> realtyDtos = toRealtyDtosList(realty);
+        Page<Realty> realty = realtyService.getAllDeleted(pageable);
+        Page<RealtyDto> realtyDtos = realty.map(converter::toRealtyDto);
 
         return ResponseEntity.ok(realtyDtos);
     }
@@ -112,20 +95,24 @@ public class RealtyController {
 
     @PatchMapping("/{id}")
     ResponseEntity<Void> patchReality(@PathVariable("id") Long id, @RequestBody RealtyDto realtyDto) {
-        realtyService.edit(realtyDto, id);
+        User owner = userDetailsService.getAuthenticatedUser();
+        realtyService.isOwner(owner, id);
+
+        Realty realty = converter.toRealty(realtyDto);
+        realtyService.edit(realty, owner);
         return ResponseEntity.status(204).build();
     }
 
     @DeleteMapping("/{id}")
     ResponseEntity<Void> deleteRealty(@PathVariable("id") Long id) {
+        User owner = userDetailsService.getAuthenticatedUser();
+        realtyService.isOwner(owner, id);
         realtyService.deleteById(id);
+
         return ResponseEntity.status(204).build();
     }
 
-    private List<RealtyDto> toRealtyDtosList(List<Realty> realties) {
-        return realties
-                .stream()
-                .map(converter::toRealtyDto)
-                .collect(Collectors.toList());
+    private Pageable createPageable(Integer pageNum, String sortBy, String sortWith) {
+        return PageRequest.of(pageNum, 10, Sort.by(Sort.Direction.valueOf(sortWith), sortBy));
     }
 }
