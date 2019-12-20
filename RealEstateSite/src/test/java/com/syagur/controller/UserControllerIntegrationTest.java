@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @RunWith(SpringRunner.class)
-@TestPropertySource("/application-test.yml")
+@TestPropertySource("/application-test.properties")
 @WithMockUser(username = "admin#TEST@mail.com", authorities = "ADMIN")
 public class UserControllerIntegrationTest {
 

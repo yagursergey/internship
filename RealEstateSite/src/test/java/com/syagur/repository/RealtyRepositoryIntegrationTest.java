@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-@TestPropertySource("/application-test.yml")
+@TestPropertySource("/application-test.properties")
 public class RealtyRepositoryIntegrationTest {
 
     private static final boolean DELETED = true;
