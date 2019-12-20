@@ -1,7 +1,12 @@
 package com.syagur.common.exception;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDateTime;
 
+@Data
+@NoArgsConstructor
 public class CustomErrorResponse {
 
     private String message;
@@ -14,31 +19,5 @@ public class CustomErrorResponse {
         this.time = LocalDateTime.now();
     }
 
-    public CustomErrorResponse() {
 
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public LocalDateTime getTime() {
-        return time;
-    }
-
-    public void setTime(LocalDateTime time) {
-        this.time = time;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
 }

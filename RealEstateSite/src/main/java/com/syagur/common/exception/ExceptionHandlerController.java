@@ -60,9 +60,11 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
     }
 
     private CustomErrorResponse createNewException(Exception ex) {
+
         CustomErrorResponse error = new CustomErrorResponse();
         error.setTime(LocalDateTime.now());
         error.setMessage(ex.getMessage());
+
         return error;
     }
 }
