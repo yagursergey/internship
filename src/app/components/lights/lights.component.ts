@@ -7,8 +7,16 @@ import { Component, OnInit} from '@angular/core';
 })
 export class LightsComponent implements OnInit {
 
-  constructor() {}
+  isVisible: boolean;
+
+  constructor() {
+    this.isVisible = false;
+  }
 
   ngOnInit() {}
  
+  turn() {
+    this.isVisible = !this.isVisible;
+    console.log(this.isVisible);
+  }
 }

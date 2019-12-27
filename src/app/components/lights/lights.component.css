@@ -1,4 +1,8 @@
 
+.toggle {
+  float: right;
+}
+
 .lightrope {
     text-align: center;
     white-space: nowrap;
@@ -8,7 +12,7 @@
     margin: -15px 0 0 0;
     padding: 0;
     pointer-events: none;
-    width: 50%;
+    width: 47%;
   }
   
   .lightrope li {

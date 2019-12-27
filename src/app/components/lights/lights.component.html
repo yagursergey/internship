@@ -1,5 +1,8 @@
+<button (click)="turn()" class="toggle" mat-icon-button >
+  <mat-icon class="c">flare</mat-icon>
+</button>
 <div class="boxForLights">
-    <ul class="lightrope">
+    <ul class="lightrope"  [style.display]="isVisible ? 'block' : 'none'">
       <li></li>
       <li></li>
       <li></li>
