@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="0dd3adc2-d6ae-4a4b-a919-6ff019b61a55" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/build/generated/sources/annotationProcessor/java/main/com/syagur/common/util/ConverterImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/syagur/service/UserServiceImplIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/syagur/service/UserServiceImplIntegrationTest.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <task path="RUN">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="RealEstateSite" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="RealEstateSite" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="RealEstateSite" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="application" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="RealEstateSite" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="RealEstateSite" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="verification" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1UTMXkrjkyHJk6exTyomcSHEwIC" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="external.system.task.project.file.to.start" value="$PROJECT_DIR$" />
+    <property name="last.edited.regexp" value="zxv@mail.com" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.annotationProcessors" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.syagur.common" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$/src/test" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Gradle.RealEstateSite [clean]">
+    <configuration name="RUN" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="clean" />
+            <option value="bootRun" />
+          </list>
+        </option>
+        <option name="vmOptions" value="" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="RealEstateSite [buildNeeded]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="buildNeeded" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="RealEstateSite [check]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="check" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="RealEstateSite [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="clean" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="RealEstateSite [test]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="RealtyControllerIntegrationTest.givenPatchRealtyById_whenPatchRealtyById_thenPatchRealty" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;com.syagur.controller.RealtyControllerIntegrationTest.givenPatchRealtyById_whenPatchRealtyById_thenPatchRealty&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":cleanTest" />
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>false</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Gradle.RUN" />
+      <item itemvalue="Gradle.RealEstateSite [buildNeeded]" />
+      <item itemvalue="Gradle.RealEstateSite [check]" />
+      <item itemvalue="Gradle.RealEstateSite [test]" />
+      <item itemvalue="Gradle.RealEstateSite [clean]" />
+      <item itemvalue="Gradle.RealtyControllerIntegrationTest.givenPatchRealtyById_whenPatchRealtyById_thenPatchRealty" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.RealtyControllerIntegrationTest.givenPatchRealtyById_whenPatchRealtyById_thenPatchRealty" />
+        <item itemvalue="Gradle.RealEstateSite [clean]" />
+        <item itemvalue="Gradle.RealEstateSite [test]" />
+        <item itemvalue="Gradle.RealEstateSite [check]" />
+        <item itemvalue="Gradle.RealEstateSite [buildNeeded]" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0dd3adc2-d6ae-4a4b-a919-6ff019b61a55" name="Default Changelist" comment="" />
+      <created>1575376173781</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1575376173781</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Make an userController and add a admin-functions. Fix bug with Jwt-token and Security.">
+      <created>1575472347747</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1575472347747</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Made all functional for Admin. Made soft-delete and inject new converter (mapStruct).">
+      <created>1575561929684</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1575561929684</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Secure all functionality by roles. Fix bugs. Add common path to project.">
+      <created>1575902001234</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1575902001234</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Start to write integration tests.">
+      <created>1575966702064</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1575966702064</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Code refactoring;">
+      <created>1576151588693</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1576151588693</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Code refactoring;">
+      <created>1576151969997</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1576151969997</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Write integration tests;">
+      <created>1576164534656</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1576164534656</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Write integration tests;">
+      <created>1576243138657</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1576243138657</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Write integration tests;">
+      <created>1576251776144</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1576251776144</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Fix all integration tests;">
+      <created>1576491166671</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1576491166671</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Add Lombok, application.yml, add Swagger with JWT auth, start add pagination;">
+      <created>1576593282738</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1576593282738</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Fix bugs.">
+      <created>1576758079540</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1576758079540</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Fix bugs.">
+      <created>1576843774410</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1576843774410</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Fix bugwith application-test.yml file in test.">
+      <created>1576846559518</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1576846559518</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
+    <servers />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.sql" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Make an userController and add a admin-functions. Fix bug with Jwt-token and Security." />
+    <MESSAGE value="Made all functional for Admin. Made soft-delete and inject new converter (mapStruct)." />
+    <MESSAGE value="Secure all functionality by roles. Fix bugs. Add common path to project." />
+    <MESSAGE value="Start to write integration tests." />
+    <MESSAGE value="Code refactoring;" />
+    <MESSAGE value="Write integration tests;" />
+    <MESSAGE value="Fix all integration tests;" />
+    <MESSAGE value="Add Lombok, application.yml, add Swagger with JWT auth, start add pagination;" />
+    <MESSAGE value="Fix bugs." />
+    <MESSAGE value="Fix bugwith application-test.yml file in test." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix bugwith application-test.yml file in test." />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="925" y="215" width="800" height="677" key="#Auto_Import" timestamp="1576222692283">
+      <screen x="55" y="27" width="1865" height="1053" />
+    </state>
+    <state x="925" y="215" width="800" height="677" key="#Auto_Import/55.27.1865.1053@55.27.1865.1053" timestamp="1576222692283" />
+    <state x="582" y="214" width="800" height="677" key="#Project_Structure" timestamp="1575376371283">
+      <screen x="55" y="27" width="1865" height="1053" />
+    </state>
+    <state x="582" y="214" width="800" height="677" key="#Project_Structure/55.27.1865.1053@55.27.1865.1053" timestamp="1575376371283" />
+    <state x="445" y="211" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1576756945146">
+      <screen x="55" y="27" width="1865" height="1053" />
+    </state>
+    <state x="445" y="211" key="#com.intellij.execution.impl.EditConfigurationsDialog/55.27.1865.1053@55.27.1865.1053" timestamp="1576756945146" />
+    <state x="842" y="127" width="977" height="853" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog" timestamp="1576230300090">
+      <screen x="55" y="27" width="1865" height="1053" />
+    </state>
+    <state x="842" y="127" width="977" height="853" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog/55.27.1865.1053@55.27.1865.1053" timestamp="1576230300090" />
+    <state x="795" y="265" width="455" height="575" key="#com.intellij.ide.util.MemberChooser" timestamp="1576752017540">
+      <screen x="55" y="27" width="1865" height="1053" />
+    </state>
+    <state x="795" y="265" width="455" height="575" key="#com.intellij.ide.util.MemberChooser/55.27.1865.1053@55.27.1865.1053" timestamp="1576752017540" />
+    <state x="536" y="481" width="940" height="142" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1576749239245">
+      <screen x="55" y="27" width="1865" height="1053" />
+    </state>
+    <state x="536" y="481" width="940" height="142" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/55.27.1865.1053@55.27.1865.1053" timestamp="1576749239245" />
+    <state x="779" y="416" width="448" height="282" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1576564217344">
+      <screen x="55" y="27" width="1865" height="1053" />
+    </state>
+    <state x="779" y="416" width="448" height="282" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/55.27.1865.1053@55.27.1865.1053" timestamp="1576564217344" />
+    <state x="1134" y="405" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages" timestamp="1576749240638">
+      <screen x="55" y="27" width="1865" height="1053" />
+    </state>
+    <state x="1134" y="405" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages/55.27.1865.1053@55.27.1865.1053" timestamp="1576749240638" />
+    <state x="478" y="27" width="1000" height="1053" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1575545742560">
+      <screen x="55" y="27" width="1865" height="1053" />
+    </state>
+    <state x="478" y="27" width="1000" height="1053" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/55.27.1865.1053@55.27.1865.1053" timestamp="1575545742560" />
+    <state x="720" y="303" width="524" height="499" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1576846312584">
+      <screen x="55" y="27" width="1865" height="1053" />
+    </state>
+    <state x="720" y="303" width="524" height="499" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/55.27.1865.1053@55.27.1865.1053" timestamp="1576846312584" />
+    <state x="537" y="151" width="891" height="802" key="CommitChangelistDialog2" timestamp="1576846559440">
+      <screen x="55" y="27" width="1865" height="1053" />
+    </state>
+    <state x="537" y="151" width="891" height="802" key="CommitChangelistDialog2/55.27.1865.1053@55.27.1865.1053" timestamp="1576846559440" />
+    <state x="1091" y="260" width="424" height="484" key="FileChooserDialogImpl" timestamp="1577433099756">
+      <screen x="55" y="27" width="1865" height="1053" />
+    </state>
+    <state x="1091" y="260" width="424" height="484" key="FileChooserDialogImpl/55.27.1865.1053@55.27.1865.1053" timestamp="1577433099756" />
+    <state width="1562" height="414" key="GridCell.Tab.0.bottom" timestamp="1577454844706">
+      <screen x="55" y="27" width="1865" height="1053" />
+    </state>
+    <state width="1562" height="414" key="GridCell.Tab.0.bottom/55.27.1865.1053@55.27.1865.1053" timestamp="1577454844706" />
+    <state width="1562" height="414" key="GridCell.Tab.0.center" timestamp="1577454844706">
+      <screen x="55" y="27" width="1865" height="1053" />
+    </state>
+    <state width="1562" height="414" key="GridCell.Tab.0.center/55.27.1865.1053@55.27.1865.1053" timestamp="1577454844706" />
+    <state width="1562" height="414" key="GridCell.Tab.0.left" timestamp="1577454844705">
+      <screen x="55" y="27" width="1865" height="1053" />
+    </state>
+    <state width="1562" height="414" key="GridCell.Tab.0.left/55.27.1865.1053@55.27.1865.1053" timestamp="1577454844705" />
+    <state width="1562" height="414" key="GridCell.Tab.0.right" timestamp="1577454844706">
+      <screen x="55" y="27" width="1865" height="1053" />
+    </state>
+    <state width="1562" height="414" key="GridCell.Tab.0.right/55.27.1865.1053@55.27.1865.1053" timestamp="1577454844706" />
+    <state width="1823" height="369" key="GridCell.Tab.1.bottom" timestamp="1576768828965">
+      <screen x="55" y="27" width="1865" height="1053" />
+    </state>
+    <state width="1823" height="369" key="GridCell.Tab.1.bottom/55.27.1865.1053@55.27.1865.1053" timestamp="1576768828965" />
+    <state width="1823" height="369" key="GridCell.Tab.1.center" timestamp="1576768828964">
+      <screen x="55" y="27" width="1865" height="1053" />
+    </state>
+    <state width="1823" height="369" key="GridCell.Tab.1.center/55.27.1865.1053@55.27.1865.1053" timestamp="1576768828964" />
+    <state width="1823" height="369" key="GridCell.Tab.1.left" timestamp="1576768828964">
+      <screen x="55" y="27" width="1865" height="1053" />
+    </state>
+    <state width="1823" height="369" key="GridCell.Tab.1.left/55.27.1865.1053@55.27.1865.1053" timestamp="1576768828964" />
+    <state width="1823" height="369" key="GridCell.Tab.1.right" timestamp="1576768828964">
+      <screen x="55" y="27" width="1865" height="1053" />
+    </state>
+    <state width="1823" height="369" key="GridCell.Tab.1.right/55.27.1865.1053@55.27.1865.1053" timestamp="1576768828964" />
+    <state x="700" y="272" width="564" height="561" key="MultipleFileMergeDialog" timestamp="1576151623279">
+      <screen x="55" y="27" width="1865" height="1053" />
+    </state>
+    <state x="700" y="272" width="564" height="561" key="MultipleFileMergeDialog/55.27.1865.1053@55.27.1865.1053" timestamp="1576151623279" />
+    <state x="188" y="169" width="1304" height="845" key="SettingsEditor" timestamp="1577373488452">
+      <screen x="55" y="27" width="1865" height="1053" />
+    </state>
+    <state x="188" y="169" width="1304" height="845" key="SettingsEditor/55.27.1865.1053@55.27.1865.1053" timestamp="1577373488452" />
+    <state x="582" y="277" width="800" height="551" key="Vcs.Push.Dialog.v2" timestamp="1576846560926">
+      <screen x="55" y="27" width="1865" height="1053" />
+    </state>
+    <state x="582" y="277" width="800" height="551" key="Vcs.Push.Dialog.v2/55.27.1865.1053@55.27.1865.1053" timestamp="1576846560926" />
+    <state x="643" y="380" key="com.intellij.ide.util.TipDialog" timestamp="1575376178162">
+      <screen x="55" y="27" width="1865" height="1053" />
+    </state>
+    <state x="643" y="380" key="com.intellij.ide.util.TipDialog/55.27.1865.1053@55.27.1865.1053" timestamp="1575376178162" />
+    <state x="324" y="27" width="543" height="523" key="dock-window-1" timestamp="1575544007768">
+      <screen x="55" y="27" width="1865" height="1053" />
+    </state>
+    <state x="324" y="27" width="543" height="523" key="dock-window-1/55.27.1865.1053@55.27.1865.1053" timestamp="1575544007768" />
+    <state x="404" y="176" width="1157" height="752" key="new project wizard" timestamp="1576824921209">
+      <screen x="55" y="27" width="1865" height="1053" />
+    </state>
+    <state x="404" y="176" width="1157" height="752" key="new project wizard/55.27.1865.1053@55.27.1865.1053" timestamp="1576824921209" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/RealEstateSite$RealtyControllerIntegrationTest.ic" NAME="RealtyControllerIntegrationTest Coverage Results" MODIFIED="1576223580119" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+</project>

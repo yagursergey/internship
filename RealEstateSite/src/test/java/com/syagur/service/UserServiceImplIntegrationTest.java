@@ -41,7 +41,6 @@ public class UserServiceImplIntegrationTest {
 
         Page<User> users = userService.findAll(PAGEABLE);
 
-        System.out.println(users.getTotalElements());
         assertTrue(users.hasContent());
         assertThat(users.getTotalElements())
                 .isEqualTo(TOTAL_ELEMENTS);
