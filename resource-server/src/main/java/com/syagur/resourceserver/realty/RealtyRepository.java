@@ -6,7 +6,9 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.Optional;
 
-public interface RealtyRepository extends MongoRepository<Realty, Long> {
+public interface RealtyRepository extends MongoRepository<Realty, String> {
+
+    Optional<Page<Realty>> findByOwnerEmailAndIsDeletedFalse(String ownerEmail, Pageable pageable);
 
     Optional<Page<Realty>> findByIsDeletedFalse(Pageable pageable);
 

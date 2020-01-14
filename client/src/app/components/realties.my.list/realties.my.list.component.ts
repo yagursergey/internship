@@ -1,24 +1,24 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
 import { Realty } from 'src/app/model/Realty';
+import { Router } from '@angular/router';
 import { RealtyService } from 'src/app/serivce/realty.service';
-import { MatPaginator, MatTableDataSource } from '@angular/material';
-import { Pageable } from 'src/app/model/Pageable';
+import { MatTableDataSource, MatPaginator } from '@angular/material';
 import { ParamSet } from 'src/app/model/ParamSet';
+import { Pageable } from 'src/app/model/Pageable';
 
 @Component({
-  selector: 'app-realties-all-list',
-  templateUrl: './realties.all.list.component.html',
-  styleUrls: ['./realties.all.list.component.css']
+  selector: 'app-realties-my-list',
+  templateUrl: './realties.my.list.component.html',
+  styleUrls: ['./realties.my.list.component.css']
 })
-export class RealtiesAllListComponent implements OnInit {
+export class RealtiesMyListComponent implements OnInit {
 
   dataSource: MatTableDataSource<Realty>;
   realties: Realty[];
-  pageable: Pageable;
-  params: ParamSet;
   displayedColumns: string[] = ['id', 'price', 'square', 'type', 'overview'];
   isASC = true;
+  pageable: Pageable;
+  params: ParamSet;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
@@ -31,39 +31,22 @@ export class RealtiesAllListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.service.getAllRealties(this.params).subscribe( data => {
+    this.service.getMyRealties(this.params).subscribe( data => {
       this.setData(data);
     });
-  }
-
-  logout() {
-    console.log('logout');
-  }
-
-  goToRealtiesMy() {
-    this.router.navigate(['/realties/my']);
-  }
-
-  goToRealtiesCreate() {
-    this.router.navigate(['/realties/new']);
-  }
-
-  goToRealtyOverview(id: string) {
-    this.router.navigate(['realties/' + id]);
-    console.log('click')
   }
 
   getRealties(value: string) {
     this.isASC = !this.isASC;
     this.setQueryParams(null, value);
-    this.service.getAllRealties(this.params).subscribe( data => {
+    this.service.getMyRealties(this.params).subscribe( data => {
       this.setData(data);
     });
   }
 
   handlePage(event) {
     this.setQueryParams(event,null);
-    this.service.getAllRealties(this.params).subscribe( data => {
+    this.service.getMyRealties(this.params).subscribe( data => {
       this.setData(data);
     });
   }
@@ -94,6 +77,28 @@ export class RealtiesAllListComponent implements OnInit {
     this.realties = data.content;
     this.dataSource = new MatTableDataSource(this.realties);
     this.paginator.length = this.pageable.totalElements;
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    this.router.navigate(['login']);
+  }
+
+  goToRealtiesAll() {
+    this.router.navigate(['/realties']);
+  }
+
+  goToRealtiesCreate() {
+    this.router.navigate(['/realties/new']);
+  }
+
+  goToRealtyOverview(id: string) {
+    localStorage.setItem('isOwner', 'true');
+    this.router.navigate(['/realties/' + id ]);
   }
 
 }

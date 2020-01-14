@@ -26,15 +26,16 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
                 .csrf().disable().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
                 .antMatchers("/sso/login").permitAll()
-                .antMatchers("/swagger-resources/**", "/v2/api-docs", "/configuration/**", "/webjars/**", "/swagger*/**").permitAll()
+                .antMatchers("/swagger-resources/**", "/v2/api-docs", "/configuration/**",
+                        "/webjars/**", "/swagger*/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/realties/").hasAnyAuthority("ADMIN", "USER")
                 .antMatchers(HttpMethod.POST, "/realties/").hasAuthority("USER")
-                .antMatchers(HttpMethod.DELETE, "/realties/{id}").hasAuthority("USER")
-                .antMatchers(HttpMethod.PATCH, "/realties/{id}").hasAuthority("USER")
-                .antMatchers(HttpMethod.GET, "/realties/{id}").hasAnyAuthority("ADMIN", "USER")
-                .antMatchers("/realties/my").hasAuthority("USER")
-                .antMatchers("/realties/deleted").hasAuthority("ADMIN")
-                .antMatchers("/realties/deleted/{id}").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/realties/{id}/").hasAuthority("USER")
+                .antMatchers(HttpMethod.PATCH, "/realties/{id}/").hasAuthority("USER")
+                .antMatchers(HttpMethod.GET, "/realties/{id}/").hasAnyAuthority("ADMIN", "USER")
+                .antMatchers("/realties/my/").hasAuthority("USER")
+                .antMatchers("/realties/deleted/").hasAuthority("ADMIN")
+                .antMatchers("/realties/deleted/{id}/").hasAuthority("ADMIN")
                 .antMatchers("/users/**").hasAuthority("ADMIN")
                 .anyRequest().authenticated();
     }

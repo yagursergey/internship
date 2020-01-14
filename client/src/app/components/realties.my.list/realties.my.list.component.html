@@ -1,27 +1,25 @@
 <div>
   <div>
-    <mat-toolbar class="col2">
+    <mat-toolbar>
       <div class="all-width">
         <div class="button-row">
-          <button mat-raised-button (click)="goToRealtiesMy()">My
-            Realties</button>
-          <button mat-raised-button (click)="goToRealtiesCreate()">Create
-            new</button>
-          <button mat-raised-button (click)="logout()" class="to-right">
-            <mat-icon>exit_to_app</mat-icon>
-          </button>
+        <button mat-raised-button (click)="goToRealtiesAll()">All Realties</button>
+        <button mat-raised-button (click)="goToRealtiesCreate()">Create new</button>
+        <button mat-raised-button (click)="logout()" class="to-right">
+          <mat-icon>exit_to_app</mat-icon>
+        </button>
+      </div>
+    </div>
+      </mat-toolbar>
+      <mat-toolbar>
+        <div class="button-row">
+          <button mat-raised-button (click)="getRealties('id')">Id</button>
+          <button mat-raised-button (click)="getRealties('price')">Price</button>
+          <button mat-raised-button (click)="getRealties('square')">Square</button>
+          <button mat-raised-button (click)="getRealties('type')">Type</button>
         </div>
-      </div>
-    </mat-toolbar>
-    <mat-toolbar class="col2">
-      <div class="button-row">
-        <button mat-raised-button (click)="getRealties('id')">Id</button>
-        <button mat-raised-button (click)="getRealties('price')">Price</button>
-        <button mat-raised-button (click)="getRealties('square')">Square</button>
-        <button mat-raised-button (click)="getRealties('type')">Type</button>
-      </div>
-    </mat-toolbar>
-  </div>
+      </mat-toolbar>
+    </div>
   <div>
     <ul>
       <li *ngFor="let realty of realties">
@@ -44,7 +42,7 @@
         </mat-card>
       </li>
     </ul>
-    <mat-paginator [pageSizeOptions]="[6]" (page)="pageEvent = handlePage($event)" [showFirstLastButtons]="false">
+    <mat-paginator [pageSizeOptions]="[10]" (page)="pageEvent = handlePage($event)" [showFirstLastButtons]="false">
     </mat-paginator>
   </div>
 </div>

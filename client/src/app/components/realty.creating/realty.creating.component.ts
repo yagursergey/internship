@@ -42,7 +42,7 @@ export class RealtyCreatingComponent implements OnInit {
   }
 
   goToRealtiesAll() {
-    this.router.navigate(['/realties/all']);
+    this.router.navigate(['/realties']);
   }
 
 }

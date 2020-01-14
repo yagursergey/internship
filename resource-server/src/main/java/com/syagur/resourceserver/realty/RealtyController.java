@@ -38,6 +38,28 @@ public class RealtyController {
         return ResponseEntity.ok(realtyDtos);
     }
 
+    @GetMapping("/my")
+    ResponseEntity<Page<RealtyDto>> getRealtiesByUserId(
+            @RequestParam(value = "pageNum", defaultValue = "0") Integer pageNum,
+            @RequestParam(value = "sortBy", defaultValue = "id") String sortBy,
+            @RequestParam(value = "sortWith", defaultValue = "ASC") String sortWith) {
+
+        Pageable pageable = getPageable(pageNum, sortBy, sortWith);
+
+        String owner = getAuthorizedUserEmail();
+
+        Page<Realty> realty = realtyService.findByOwner(owner, pageable);
+        Page<RealtyDto> realtyDtos = realty.map(converter::toRealtyDto);
+
+        return ResponseEntity.ok(realtyDtos);
+    }
+
+    @GetMapping("/{id}")
+    ResponseEntity<RealtyDto> getRealtyById(@PathVariable("id") String id) {
+        RealtyDto realtyDto = converter.toRealtyDto(realtyService.findById(id));
+        return ResponseEntity.ok(realtyDto);
+    }
+
     @PostMapping
     public ResponseEntity<Void> save(@RequestBody RealtyDto realtyDto) {
 
@@ -50,8 +72,30 @@ public class RealtyController {
         return ResponseEntity.created(location).build();
     }
 
+    @PatchMapping("/{id}")
+    ResponseEntity<Void> patchReality(@PathVariable("id") String id, @RequestBody RealtyDto realtyDto) {
+
+        String owner = getAuthorizedUserEmail();
+        realtyService.isOwner(owner, id);
+
+        Realty realty = converter.toRealty(realtyDto);
+        realtyService.edit(realty, owner);
+
+        return ResponseEntity.status(204).build();
+    }
+
+    @DeleteMapping("/{id}")
+    ResponseEntity<Void> deleteRealty(@PathVariable("id") String id) {
+
+        String owner = getAuthorizedUserEmail();
+        realtyService.isOwner(owner, id);
+        realtyService.deleteById(id);
+
+        return ResponseEntity.status(204).build();
+    }
+
     private Pageable getPageable(Integer pageNum, String sortBy, String sortWith) {
-        return PageRequest.of(pageNum, 10, Sort.by(Sort.Direction.valueOf(sortWith), sortBy));
+        return PageRequest.of(pageNum, 6, Sort.by(Sort.Direction.valueOf(sortWith), sortBy));
     }
 
     private String getAuthorizedUserEmail() {

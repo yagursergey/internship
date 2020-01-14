@@ -2,52 +2,72 @@
 
 html,
 body {
-    height: 100%;
+  height: 100%;
 }
 
 body {
-    margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 .inCenter {
-    width: 50%;
-    margin: 0 auto;
+  width: 70%;
+  margin: 0 auto;
 }
 
 .toRight {
-    float: right;
+  float: right;
 }
 
 .bigText {
-    font-size: x-large;
-    color: #4f4f4f;
+  font-size: x-large;
+  color: #4f4f4f;
 }
 
 .halfBlock {
-    display: flex;
-    width: 50%;
+  display: flex;
+  width: 50%;
 }
 
 .rowReverse {
-    flex-direction: row-reverse;
+  flex-direction: row-reverse;
 }
 
 .doFlex {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .spaceAround {
-    justify-content: space-around;
+  justify-content: space-around;
 }
 
 .spaceBetween {
-    justify-content: space-between;
+  justify-content: space-between;
 }
 
 .boxForLights {
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 7%;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 7%;
+}
+
+.col1 {
+  background-color: #9BB799;
+}
+
+.col2 {
+  background-color: linen;
+}
+
+.col3 {
+  background-color: #F77F7C;
+}
+
+.col4 {
+  background-color: #E24967;
+}
+
+.col5 {
+  background-color: #27353B;
 }

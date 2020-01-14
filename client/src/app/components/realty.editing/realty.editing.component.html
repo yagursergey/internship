@@ -1,8 +1,9 @@
-<div>
+<div *ngIf="realty">
   <div>
     <mat-toolbar>
       <div class="all-width">
         <div class="button-row">
+          <button mat-raised-button (click)="goToRealtiesMy()">My Realties</button>
           <button mat-raised-button (click)="goToRealtiesAll()">All Realties</button>
           <button mat-raised-button (click)="logout()" class="to-right">
             <mat-icon>exit_to_app</mat-icon>
@@ -11,13 +12,12 @@
       </div>
     </mat-toolbar>
   </div>
-  <form class="example-container" [formGroup]="registerForm"
-   (ngSubmit)="onFormSubmit(registerForm.value)">
+  <form class="example-container" [formGroup]="realtyForm" (ngSubmit)="onFormSubmit(realtyForm.value)">
     <mat-form-field class="example-full-width">
-      <input matInput type="price" placeholder="Price" formControlName="price">
+      <input matInput type="price" placeholder="Price" formControlName="price" [errorStateMatcher]="matcher">
     </mat-form-field>
     <mat-form-field class="example-full-width">
-      <input matInput type="square" placeholder="Square" formControlName="square">
+      <input matInput type="square" placeholder="Square" formControlName="square" [errorStateMatcher]="matcher">
     </mat-form-field>
     <mat-form-field>
       <mat-select formControlName="type" placeholder="Select type">
@@ -27,11 +27,11 @@
       </mat-select>
     </mat-form-field>
     <mat-form-field class="example-full-width">
-      <input matInput type="description" placeholder="Description" formControlName="description">
+      <input matInput type="description" placeholder="Description" formControlName="description"
+        [errorStateMatcher]="matcher">
     </mat-form-field>
-
     <div class="button-row">
-      <button type="submit" mat-raised-button class="to-right">Create</button>
+      <button type="submit" mat-raised-button class="to-right">Save</button>
     </div>
   </form>
 </div>

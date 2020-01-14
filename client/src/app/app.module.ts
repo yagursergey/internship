@@ -4,11 +4,14 @@ import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { KeycloakService, KeycloakAngularModule } from 'keycloak-angular';
 import { initializer } from './utils/app-init';
 import { RealtyCreatingComponent } from './components/realty.creating/realty.creating.component';
-
+import { RealtiesMyListComponent } from './components/realties.my.list/realties.my.list.component';
+import { RealtyEditingComponent } from './components/realty.editing/realty.editing.component';
+import { RealtyOverviewComponent } from './components/realty.overview/realty.overview.component';
+import { RealtiesAllListComponent } from './components/realties.all.list/realties.all.list.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
@@ -27,13 +30,20 @@ import {
   MatListModule,
   MatSelectModule,
  } from '@angular/material';
-import { RealtiesAllListComponent } from './components/realties.all.list/realties.all.list.component';
+
+ import {MatGridListModule} from '@angular/material/grid-list';
+ import {MatDialogModule} from '@angular/material/dialog';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     RealtiesAllListComponent,
     RealtyCreatingComponent,
+    RealtiesMyListComponent,
+    RealtyEditingComponent,
+    RealtyOverviewComponent,
+
   ],
   imports: [
     KeycloakAngularModule,
@@ -61,6 +71,10 @@ import { RealtiesAllListComponent } from './components/realties.all.list/realtie
     MatDividerModule,
     MatListModule,
     MatSelectModule,
+
+    MatGridListModule,
+    MatDialogModule,
+    
   ],
   providers: [
     {
