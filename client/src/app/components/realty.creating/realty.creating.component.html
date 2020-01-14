@@ -1,0 +1,38 @@
+<div>
+  <div>
+    <mat-toolbar>
+      <div class="halfBlock spaceAround">
+        <h3>Create new</h3>
+        <button mat-raised-button (click)="goToRealtiesAll()">All Realties</button>
+      </div>
+      <div class="halfBlock rowReverse">
+      </div>
+    </mat-toolbar>
+  </div>
+  <form class="example-container" [formGroup]="registerForm" (ngSubmit)="onFormSubmit(registerForm.value)">
+
+    <mat-form-field class="example-full-width">
+      <input matInput type="price" placeholder="Price" formControlName="price">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <input matInput type="square" placeholder="Square" formControlName="square">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select formControlName="type" placeholder="Select type">
+        <mat-option value="LAND">Land</mat-option>
+        <mat-option value="LIVING_ROOM">Living room</mat-option>
+        <mat-option value="NON_RESIDENTIAL_PREMISES">Non residential premises</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <input matInput type="description" placeholder="Description" formControlName="description">
+    </mat-form-field>
+
+    <div class="button-row">
+      <button type="submit" mat-raised-button>Create</button>
+    </div>
+  </form>
+</div>
