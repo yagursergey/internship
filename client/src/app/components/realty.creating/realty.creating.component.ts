@@ -3,6 +3,7 @@ import { Realty } from 'src/app/model/Realty';
 import { Router } from '@angular/router';
 import { RealtyService } from 'src/app/serivce/realty.service';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-realty-creating',
@@ -11,9 +12,17 @@ import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 })
 export class RealtyCreatingComponent implements OnInit {
 
+  pipe = new DatePipe('en-US');
+
   realty: Realty;
 
   registerForm: FormGroup;
+
+  city: string;
+  house: string;
+  street: string;
+
+  dateOfBuilding: string;
 
   price: string;
   square: string;
@@ -27,6 +36,8 @@ export class RealtyCreatingComponent implements OnInit {
     ) { }
 
    onFormSubmit(form: NgForm) {
+     form['dateOfBuilding'] = this.pipe.transform(form['dateOfBuilding'], 'yyyy-MM-dd');
+     console.log(form['dateOfBuilding']);
      this.realtyService.save(form).subscribe( res => {
       this.goToRealtiesAll();
      });
@@ -34,10 +45,19 @@ export class RealtyCreatingComponent implements OnInit {
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
+
+      'city': [null, Validators.required],
+      'house': [null, Validators.required],
+      'street': [null, Validators.required],
+      
+      'dateOfBuilding': [null, Validators.required],
+
+
       'price': [null, Validators.required],
       'square': [null, Validators.required],
       'type': [null, Validators.required],
       'description': [null, Validators.required]
+      
     })
   }
 

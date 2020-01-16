@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, NgModule } from '@angular/core';
 import { RealtyService } from 'src/app/serivce/realty.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Realty } from 'src/app/model/Realty';
+
 
 @Component({
   selector: 'app-realty-overview',
@@ -12,6 +13,9 @@ export class RealtyOverviewComponent implements OnInit {
 
   id: string;
   realty: Realty;
+  coordX: string;
+  coordY: string;
+
 
   constructor(
     private realtyService: RealtyService,
@@ -25,7 +29,6 @@ export class RealtyOverviewComponent implements OnInit {
     this.realtyService.findById(this.id).subscribe( data => {
       this.realty = data;
     });
-    console.log(this.realty);
   }
 
   delete(id: string) {

@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Realty } from '../model/Realty';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { Pageable } from '../model/Pageable';
 import { ParamSet } from '../model/ParamSet';
+import { AngularYandexMapsModule } from 'angular8-yandex-maps';
+import { YandexGeoObjectComponent } from 'angular8-yandex-maps/lib/components/yandex-geoobject-component/yandex-geoobject.component';
 
 const apiUrl = 'http://localhost:8090/api/v1/realties';
+
+const yandexUrl = 'https://geocode-maps.yandex.ru/1.x/?apikey=94004118-bc46-4c2a-989d-5a622bc8bf64&format=json&geocode=';
 
 @Injectable({
   providedIn: 'root'

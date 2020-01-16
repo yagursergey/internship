@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-01-14T18:07:42+0300",
+    date = "2020-01-16T13:55:20+0300",
     comments = "version: 1.3.1.Final, compiler: javac, environment: Java 1.8.0_232 (Private Build)"
 )
 @Component
@@ -34,8 +34,13 @@ public class ConverterImpl implements Converter {
             realtyDto.setType( realty.getType().name() );
         }
         realtyDto.setDescription( realty.getDescription() );
-        realtyDto.setDeleted( realty.isDeleted() );
         realtyDto.setOwnerEmail( realty.getOwnerEmail() );
+        if ( realty.getDateOfBuilding() != null ) {
+            realtyDto.setDateOfBuilding( DateTimeFormatter.ISO_LOCAL_DATE.format( realty.getDateOfBuilding() ) );
+        }
+        realtyDto.setCity( realty.getCity() );
+        realtyDto.setStreet( realty.getStreet() );
+        realtyDto.setHouse( realty.getHouse() );
 
         return realtyDto;
     }
@@ -58,8 +63,13 @@ public class ConverterImpl implements Converter {
             realty.setType( Enum.valueOf( RealtyType.class, realtyDto.getType() ) );
         }
         realty.setDescription( realtyDto.getDescription() );
-        realty.setDeleted( realtyDto.isDeleted() );
         realty.setOwnerEmail( realtyDto.getOwnerEmail() );
+        if ( realtyDto.getDateOfBuilding() != null ) {
+            realty.setDateOfBuilding( LocalDate.parse( realtyDto.getDateOfBuilding() ) );
+        }
+        realty.setCity( realtyDto.getCity() );
+        realty.setStreet( realtyDto.getStreet() );
+        realty.setHouse( realtyDto.getHouse() );
 
         return realty;
     }

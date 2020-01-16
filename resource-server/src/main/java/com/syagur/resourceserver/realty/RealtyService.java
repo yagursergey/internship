@@ -61,7 +61,7 @@ public class RealtyService {
     public void isOwner(String ownerEmail, String realtyId) {
         Realty realty = realtyRepository.findById(realtyId)
                 .orElseThrow(() -> new ResourceNotFoundException(messageForOne));
-        if(!ownerEmail.equals(realty.getOwnerEmail())) {
+        if (!ownerEmail.equals(realty.getOwnerEmail())) {
             throw new NoRightsForActionException(messageForAction);
         }
     }

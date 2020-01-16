@@ -1,22 +1,54 @@
-.example-container {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .example-container > * {
-    width: 100%;
-  }
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
 
-  .to-right {
-    float: right;
-  }
-  
-  .all-width {
-    width: 100%;
-  }
-  
-  .button-row button,
-  .button-row a {
-    margin-right: 8px;
-  }
-  
+
+.to-right {
+  float: right;
+}
+
+.all-width {
+  width: 100%;
+}
+
+.button-row button,
+.button-row a {
+  margin-right: 8px;
+}
+
+.center {
+justify-content: center;
+}
+
+.small {
+font-size: smaller;
+}
+
+.padding {
+padding: 2%;
+}
+
+.half-block {
+width: 43%;
+}
+
+.content {
+display: flex;
+flex-wrap: wrap;
+flex-direction: row;
+justify-content: center;
+}
+
+.column {
+flex-direction: column;
+}
+
+.margin {
+margin: 1%;
+}
+
+.black {
+  color: black;
+}

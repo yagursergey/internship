@@ -29,11 +29,14 @@ import {
   MatDividerModule,
   MatListModule,
   MatSelectModule,
+  MatDatepickerModule,
+  MatNativeDateModule
  } from '@angular/material';
 
  import {MatGridListModule} from '@angular/material/grid-list';
  import {MatDialogModule} from '@angular/material/dialog';
 
+ import { AngularYandexMapsModule } from 'angular8-yandex-maps';
 
 @NgModule({
   declarations: [
@@ -74,6 +77,10 @@ import {
 
     MatGridListModule,
     MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    
+    AngularYandexMapsModule.forRoot('94004118-bc46-4c2a-989d-5a622bc8bf64')
     
   ],
   providers: [

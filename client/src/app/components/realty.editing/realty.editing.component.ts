@@ -3,6 +3,7 @@ import { Realty } from 'src/app/model/Realty';
 import { FormGroup, FormBuilder, NgForm, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { RealtyService } from 'src/app/serivce/realty.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-realty-editing',
@@ -11,10 +12,15 @@ import { RealtyService } from 'src/app/serivce/realty.service';
 })
 export class RealtyEditingComponent implements OnInit {
 
+  pipe = new DatePipe('en-US');
  
   realty: Realty;
   id: string;
   realtyForm: FormGroup;
+
+  city: string;
+  house: string;
+  street: string;
 
   price: string;
   square: string;
@@ -30,18 +36,26 @@ export class RealtyEditingComponent implements OnInit {
       this.route.paramMap.subscribe( params => this.id = params.get('id'));
       this.realtyForm = this.formBuilder.group({
         'id': [null, Validators.required],
+
+        'city': [null, Validators.required],
+        'house': [null, Validators.required],
+        'street': [null, Validators.required],
+
+        'dateOfBuilding' : [null, Validators.required],
+
         'price': [null, Validators.required],
         'square': [null, Validators.required],
         'dateOfCreation': [null, Validators.required],
         'type': [null, Validators.required],
         'description': [null, Validators.required],
-        'ownerFirstName': [null, Validators.required]
+
+        'ownerEmail': [null, Validators.required]
       });
    }
 
    onFormSubmit(form: NgForm) {
-     console.log(form);
-     this.realtyService.edit(form, this.id).subscribe( res => {
+      form['dateOfBuilding'] = this.pipe.transform(form['dateOfBuilding'], 'yyyy-MM-dd');
+      this.realtyService.edit(form, this.id).subscribe( res => {
       this.goToRealtiesMy();
      });
    }

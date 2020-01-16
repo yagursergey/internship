@@ -15,7 +15,12 @@ public class RealtyDto {
     private String dateOfCreation;
     private String type;
     private String description;
-    private boolean isDeleted;
     private String ownerEmail;
+
+    private String dateOfBuilding;
+
+    private String city;
+    private String street;
+    private String house;
 
 }

@@ -52,22 +52,18 @@ body {
   padding-bottom: 7%;
 }
 
-.col1 {
-  background-color: #9BB799;
+.white {
+  background-color: white;
 }
 
-.col2 {
-  background-color: linen;
+.seashell {
+  background-color: seashell;
 }
 
-.col3 {
-  background-color: #F77F7C;
+.green {
+  background-color: #e6ffe6;
 }
 
-.col4 {
-  background-color: #E24967;
-}
-
-.col5 {
-  background-color: #27353B;
+.warn {
+  background-color: #ffcccc;
 }

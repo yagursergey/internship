@@ -25,4 +25,10 @@ public class Realty implements Serializable {
     private boolean isDeleted;
     private String ownerEmail;
 
+    private LocalDate dateOfBuilding;
+
+    private String city;
+    private String street;
+    private String house;
+
 }

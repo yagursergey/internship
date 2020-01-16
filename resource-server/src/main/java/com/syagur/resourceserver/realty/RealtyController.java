@@ -35,6 +35,7 @@ public class RealtyController {
 
         Page<Realty> realties = realtyService.findAll(pageable);
         Page<RealtyDto> realtyDtos = realties.map(converter::toRealtyDto);
+
         return ResponseEntity.ok(realtyDtos);
     }
 
@@ -66,7 +67,7 @@ public class RealtyController {
         Realty realty = converter.toRealty(realtyDto);
         realty.setOwnerEmail(getAuthorizedUserEmail());
 
-        realtyService.save(realty);
+        realtyService.save(withDefaultDescription(realty));
 
         URI location = fromCurrentRequest().buildAndExpand(realty.getId()).toUri();
         return ResponseEntity.created(location).build();
@@ -103,4 +104,10 @@ public class RealtyController {
         return context.getToken().getEmail();
     }
 
+    private Realty withDefaultDescription(Realty realty) {
+        String desc = "This is " + realty.getType() + " with price " + realty.getPrice()
+                + "$ and square " + realty.getSquare() + ". Build at " + realty.getDateOfBuilding() + ".";
+        realty.setDescription(desc);
+        return realty;
+    }
 }
