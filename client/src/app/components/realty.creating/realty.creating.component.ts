@@ -65,4 +65,8 @@ export class RealtyCreatingComponent implements OnInit {
     this.router.navigate(['/realties']);
   }
 
+  logout() {
+    console.log('logout');
+  }
+
 }

@@ -5,6 +5,7 @@ import { RealtyService } from 'src/app/serivce/realty.service';
 import { MatTableDataSource, MatPaginator } from '@angular/material';
 import { ParamSet } from 'src/app/model/ParamSet';
 import { Pageable } from 'src/app/model/Pageable';
+import { PageEvent } from '@angular/material';
 
 @Component({
   selector: 'app-realties-my-list',
@@ -19,6 +20,8 @@ export class RealtiesMyListComponent implements OnInit {
   isASC = true;
   pageable: Pageable;
   params: ParamSet;
+
+  pageEvent: any;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
@@ -84,8 +87,7 @@ export class RealtiesMyListComponent implements OnInit {
   }
 
   logout() {
-    localStorage.removeItem('token');
-    this.router.navigate(['login']);
+    console.log('logout');
   }
 
   goToRealtiesAll() {

@@ -76,8 +76,7 @@ export class RealtyEditingComponent implements OnInit {
   }
   
   logout() {
-    localStorage.removeItem('token');
-    this.router.navigate(['/login'])
+    console.log('logout');
   }
   
 }

@@ -4,10 +4,15 @@ services:
     container_name: 'mongodb'
     image: mongo
     restart: always
+    volumes: 
+      - ./mongo/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
     environment:
-      MONGO_INITDB_DATABASE: realties
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: root
+      - MONGO_INITDB_DATABASE=realties
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+      - MONGODB_USER=root
+      - MONGODB_PASS=root
+      - MONGODB_DATABASE=realties
     network_mode: 'host'
 
   backend:
@@ -17,7 +22,7 @@ services:
       - '8090:8090'
     depends_on:
       - db
-       - keycloak
+      - keycloak
     network_mode: 'host'
 
   frontend:

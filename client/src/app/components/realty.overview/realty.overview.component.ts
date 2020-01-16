@@ -50,4 +50,8 @@ export class RealtyOverviewComponent implements OnInit {
     this.router.navigate(['/realties/editing/' + this.id]);
   }
 
+  logout() {
+    console.log('logout');
+  }
+
 }
