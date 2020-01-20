@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef, ViewChild, NgModule } from '@angular/cor
 import { RealtyService } from 'src/app/serivce/realty.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Realty } from 'src/app/model/Realty';
+import { AuthService } from '../../serivce/auth.service';
 
 
 @Component({
@@ -13,26 +14,26 @@ export class RealtyOverviewComponent implements OnInit {
 
   id: string;
   realty: Realty;
-  coordX: string;
-  coordY: string;
-
+  isVisible: boolean = false;
 
   constructor(
-    private realtyService: RealtyService,
+    private service: RealtyService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private auth: AuthService
   ) {
     this.route.paramMap.subscribe( params => this.id = params.get('id'));
+    this.checkIsOwner();
   }
 
   ngOnInit() {
-    this.realtyService.findById(this.id).subscribe( data => {
+    this.service.findById(this.id).subscribe( data => {
       this.realty = data;
     });
   }
 
   delete(id: string) {
-    this.realtyService.deleteById(id).subscribe( data => {
+    this.service.deleteById(id).subscribe( data => {
       console.log('success');
     });
     this.goToRealtyMy();
@@ -40,18 +41,23 @@ export class RealtyOverviewComponent implements OnInit {
 
   goToRealtyMy() {
     this.router.navigate(['/realties/my']);
+    localStorage.removeItem('isOwner');
   }
 
   goToRealtyAll() {
     this.router.navigate(['/realties']);
+    localStorage.removeItem('isOwner');
   }
 
   goToRealtyEdit() {
     this.router.navigate(['/realties/editing/' + this.id]);
+    localStorage.removeItem('isOwner');
   }
 
-  logout() {
-    console.log('logout');
+  private checkIsOwner() {
+    if (localStorage.getItem('isOwner') == 'true') {
+      this.isVisible = true;
+    }
   }
-
+  
 }

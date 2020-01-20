@@ -8,7 +8,6 @@ import { AngularYandexMapsModule } from 'angular8-yandex-maps';
 import { YandexGeoObjectComponent } from 'angular8-yandex-maps/lib/components/yandex-geoobject-component/yandex-geoobject.component';
 
 const apiUrl = 'http://localhost:8090/api/v1/realties';
-
 const yandexUrl = 'https://geocode-maps.yandex.ru/1.x/?apikey=94004118-bc46-4c2a-989d-5a622bc8bf64&format=json&geocode=';
 
 @Injectable({

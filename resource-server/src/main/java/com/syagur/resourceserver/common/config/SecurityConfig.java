@@ -29,6 +29,7 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
                 .antMatchers("/swagger-resources/**", "/v2/api-docs", "/configuration/**",
                         "/webjars/**", "/swagger*/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/realties/").hasAnyAuthority("ADMIN", "USER")
+                .antMatchers("/token/**").hasAnyAuthority("ADMIN", "USER")
                 .antMatchers(HttpMethod.POST, "/realties/").hasAuthority("USER")
                 .antMatchers(HttpMethod.DELETE, "/realties/{id}/").hasAuthority("USER")
                 .antMatchers(HttpMethod.PATCH, "/realties/{id}/").hasAuthority("USER")

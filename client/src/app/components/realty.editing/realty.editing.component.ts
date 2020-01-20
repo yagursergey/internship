@@ -29,7 +29,7 @@ export class RealtyEditingComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private realtyService: RealtyService,
+    private service: RealtyService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute
     ) {
@@ -55,13 +55,13 @@ export class RealtyEditingComponent implements OnInit {
 
    onFormSubmit(form: NgForm) {
       form['dateOfBuilding'] = this.pipe.transform(form['dateOfBuilding'], 'yyyy-MM-dd');
-      this.realtyService.edit(form, this.id).subscribe( res => {
+      this.service.edit(form, this.id).subscribe( res => {
       this.goToRealtiesMy();
      });
    }
 
   ngOnInit() {
-    this.realtyService.findById(this.id).subscribe( data => {
+    this.service.findById(this.id).subscribe( data => {
       this.realty = data;
       this.realtyForm.setValue(this.realty);
     })
@@ -73,10 +73,6 @@ export class RealtyEditingComponent implements OnInit {
 
   goToRealtiesAll() {
     this.router.navigate(['/realties'])
-  }
-  
-  logout() {
-    console.log('logout');
   }
   
 }

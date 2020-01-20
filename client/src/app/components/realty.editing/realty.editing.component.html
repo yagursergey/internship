@@ -1,19 +1,19 @@
 <div *ngIf="realty">
   <div>
-    <mat-toolbar class="center">
-      <h1>
+    <div class="center">
+      <h1 class="head">
         Real Estate Selling Website
         <mat-icon>location_city</mat-icon>
       </h1>
-    </mat-toolbar>
-    <mat-toolbar class="col2">
+    </div>
+    <mat-toolbar class="none-corner">
       <div class="all-width">
         <div class="button-row">
-          <button mat-raised-button (click)="goToRealtiesMy()">My Realties</button>
-          <button mat-raised-button (click)="goToRealtiesAll()">All Realties</button>
-          <button mat-raised-button (click)="logout()" class="to-right warn">
+          <button mat-raised-button (click)="goToRealtiesMy()" class="blue">My Realties</button>
+          <button mat-raised-button (click)="goToRealtiesAll()" class="blue">All Realties</button>
+          <a mat-raised-button href="http://localhost:8080/auth/realms/auth-realm/protocol/openid-connect/logout?redirect_uri=http://localhost:4200/realties" class="to-right warn">
             <mat-icon>exit_to_app</mat-icon>
-          </button>
+          </a>
         </div>
       </div>
     </mat-toolbar>

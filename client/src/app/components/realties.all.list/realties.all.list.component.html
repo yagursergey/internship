@@ -1,19 +1,19 @@
 <div>
   <div>
-    <mat-toolbar class="center">
-      <h1>
+    <div class="center">
+      <h1 class="head">
         Real Estate Selling Website
         <mat-icon>location_city</mat-icon>
       </h1>
-    </mat-toolbar>
-    <mat-toolbar class="">
+    </div>
+    <mat-toolbar class="none-corner">
       <div class="button-row all-width">
         <div class="">
-          <button mat-raised-button (click)="goToRealtiesMy()">My Realties</button>
-          <button mat-raised-button (click)="goToRealtiesCreate()">Create new</button>
-          <button mat-raised-button (click)="logout()" class="to-right warn">
+          <button mat-raised-button (click)="goToRealtiesMy()" class="blue">My Realties</button>
+          <button mat-raised-button (click)="goToRealtiesCreate()" class="blue">Create new</button>
+          <a mat-raised-button href="http://localhost:8080/auth/realms/auth-realm/protocol/openid-connect/logout?redirect_uri=http://localhost:4200/realties" class="to-right warn">
             <mat-icon>exit_to_app</mat-icon>
-          </button>
+          </a>
         </div>
       </div>
     </mat-toolbar>
@@ -22,23 +22,24 @@
   <mat-card>
     <mat-toolbar class="white">
       <div class="button-row border">
-        <button mat-raised-button (click)="getRealties('id')">Id</button>
-        <button mat-raised-button (click)="getRealties('price')">Price</button>
-        <button mat-raised-button (click)="getRealties('square')">Square</button>
-        <button mat-raised-button (click)="getRealties('type')">Type</button>
+        <button mat-raised-button (click)="getRealties('id')" class="blue">Id</button>
+        <button mat-raised-button (click)="getRealties('price')" class="blue">Price</button>
+        <button mat-raised-button (click)="getRealties('square')" class="blue">Square</button>
+        <button mat-raised-button (click)="getRealties('type')" class="blue">Type</button>
+        <button mat-raised-button (click)="getRealties('dateOfBuilding')" class="blue">Date</button>
       </div>
     </mat-toolbar>
     <mat-card-content>
       <ul>
         <li *ngFor="let realty of realties">
-          <mat-card>
-            <mat-card-header>
+          <mat-card class="card">
+            <mat-card-header class="up-border white">
               <mat-card-title>Realty</mat-card-title>
               <mat-card-subtitle><span class="small">{{realty.id}}</span></mat-card-subtitle>
             </mat-card-header>
-            <img mat-card-image src="../../../assets/photo.png" alt="Random photo" class="picture">
-            <mat-card-content>
-              <mat-list>
+            <mat-divider></mat-divider>
+            <mat-card-content class="no-margin white">
+              <mat-list class="side-border ">
                 <mat-list-item>
                   <mat-icon mat-list-icon>
                     monetization_on
@@ -60,11 +61,18 @@
                   <h4 mat-line>Type:</h4>
                   <p mat-line>{{realty.type}}</p>
                 </mat-list-item>
+                <mat-list-item>
+                  <mat-icon mat-list-icon>
+                    date_range
+                  </mat-icon>
+                  <h4 mat-line>Date of building:</h4>
+                  <p mat-line>{{realty.dateOfBuilding}}</p>
+                </mat-list-item>
               </mat-list>
             </mat-card-content>
             <mat-divider></mat-divider>
-            <mat-card-actions>
-              <button mat-raised-button (click)="goToRealtyOverview(realty.id)">Overview</button>
+            <mat-card-actions >
+              <button mat-raised-button (click)="goToRealtyOverview(realty.id)" class="blue">Overview</button>
             </mat-card-actions>
           </mat-card>
         </li>

@@ -39,10 +39,6 @@ export class RealtiesAllListComponent implements OnInit {
     });
   }
 
-  logout() {
-    console.log('logout');
-  }
-
   goToRealtiesMy() {
     this.router.navigate(['/realties/my']);
   }

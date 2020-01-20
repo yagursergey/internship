@@ -9,6 +9,8 @@ import { RealtyEditingComponent } from './components/realty.editing/realty.editi
 import { RealtyOverviewComponent } from './components/realty.overview/realty.overview.component';
 import { RealtiesAllListComponent } from './components/realties.all.list/realties.all.list.component';
 
+// import { AuthService } from './serivce/auth.service';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -37,6 +39,7 @@ import {
  import {MatDialogModule} from '@angular/material/dialog';
 
  import { AngularYandexMapsModule } from 'angular8-yandex-maps';
+import { from } from 'rxjs';
 
 @NgModule({
   declarations: [
@@ -46,6 +49,7 @@ import {
     RealtiesMyListComponent,
     RealtyEditingComponent,
     RealtyOverviewComponent,
+    // AuthService,
 
   ],
   imports: [

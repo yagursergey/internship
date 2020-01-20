@@ -1,4 +1,5 @@
 .center {
+  display: flex;
   justify-content: center;
 }
 
@@ -45,4 +46,44 @@ li {
 
 .small {
   font-size: smaller;
+}
+
+.head {
+  color: white;
+  font-weight: normal;
+}
+
+.none-corner {
+  border-width: 1px;
+  border-color: #F5F5F5;
+  border-style: solid;
+  border-radius: 5px;
+}
+
+.up-border {
+  border-width: 1px;
+  border-color: #F5F5F5;
+  border-style: solid;
+  border-radius: 5px;
+  border-bottom: none;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  padding-top: 3%;
+}
+
+.side-border {
+  border-width: 1px;
+  border-color: #F5F5F5;
+  border-style: solid;
+  border-radius: 5px;
+  border-bottom: none;
+  border-top: none;
+}
+
+.no-margin {
+  margin: 0;
+}
+
+.card {
+  background-color: #F5F5F5;
 }

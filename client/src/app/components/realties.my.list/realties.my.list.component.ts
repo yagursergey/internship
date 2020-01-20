@@ -86,10 +86,6 @@ export class RealtiesMyListComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  logout() {
-    console.log('logout');
-  }
-
   goToRealtiesAll() {
     this.router.navigate(['/realties']);
   }
@@ -101,6 +97,7 @@ export class RealtiesMyListComponent implements OnInit {
   goToRealtyOverview(id: string) {
     localStorage.setItem('isOwner', 'true');
     this.router.navigate(['/realties/' + id ]);
+    localStorage.setItem('isOwner', 'true');
   }
 
 }

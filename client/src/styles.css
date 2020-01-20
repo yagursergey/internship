@@ -61,9 +61,17 @@ body {
 }
 
 .green {
-  background-color: #e6ffe6;
+  background-color: #ebfaeb;
 }
 
 .warn {
-  background-color: #ffcccc;
+  background-color: #ffe6e6;
+}
+
+.back-ground {
+  background-image: url('./assets/bg.png');
+}
+
+.blue {
+  background-color: #e6f3ff;
 }

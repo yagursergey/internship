@@ -31,14 +31,14 @@ export class RealtyCreatingComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private realtyService: RealtyService,
+    private service: RealtyService,
     private formBuilder: FormBuilder
     ) { }
 
    onFormSubmit(form: NgForm) {
      form['dateOfBuilding'] = this.pipe.transform(form['dateOfBuilding'], 'yyyy-MM-dd');
      console.log(form['dateOfBuilding']);
-     this.realtyService.save(form).subscribe( res => {
+     this.service.save(form).subscribe( res => {
       this.goToRealtiesAll();
      });
    }
@@ -61,12 +61,12 @@ export class RealtyCreatingComponent implements OnInit {
     })
   }
 
-  goToRealtiesAll() {
-    this.router.navigate(['/realties']);
+  goToRealtiesMy() {
+    this.router.navigate(['/realties/my']);
   }
 
-  logout() {
-    console.log('logout');
+  goToRealtiesAll() {
+    this.router.navigate(['/realties'])
   }
 
 }

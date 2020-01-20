@@ -1,7 +1,7 @@
 package com.syagur.resourceserver.realty;
 
-import com.syagur.resourceserver.common.exception.NoRightsForActionException;
-import com.syagur.resourceserver.common.exception.ResourceNotFoundException;
+import com.syagur.resourceserver.common.exception.exceptions.NoRightsForActionException;
+import com.syagur.resourceserver.common.exception.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
