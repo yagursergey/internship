@@ -100,7 +100,10 @@ public class RealtyController {
     }
 
     private String getAuthorizedUserEmail() {
-        KeycloakSecurityContext context = (KeycloakSecurityContext) request.getAttribute(KeycloakSecurityContext.class.getName());
+        KeycloakSecurityContext context = (KeycloakSecurityContext) request.getAttribute(
+                KeycloakSecurityContext
+                        .class
+                        .getName());
         return context.getToken().getEmail();
     }
 

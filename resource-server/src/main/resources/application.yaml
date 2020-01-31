@@ -21,6 +21,12 @@ spring:
       username: root
       password: root
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
 message:
   resourceNotFound:
     realty:

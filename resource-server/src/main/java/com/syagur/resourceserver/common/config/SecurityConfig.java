@@ -28,6 +28,7 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
                 .antMatchers("/sso/login").permitAll()
                 .antMatchers("/swagger-resources/**", "/v2/api-docs", "/configuration/**",
                         "/webjars/**", "/swagger*/**").permitAll()
+                .antMatchers("/actuator/*").permitAll()
                 .antMatchers(HttpMethod.GET, "/realties/").hasAnyAuthority("ADMIN", "USER")
                 .antMatchers("/token/**").hasAnyAuthority("ADMIN", "USER")
                 .antMatchers(HttpMethod.POST, "/realties/").hasAuthority("USER")
